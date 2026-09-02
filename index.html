@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CogAegis | Executive Overview</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-dark: #0a0d14;
+      --card-bg: rgba(255, 255, 255, 0.03);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --accent-blue: #0070f3;
+      --accent-cyan: #38bdf8;
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --theme-highlight-bg: rgba(15, 23, 42, 0.98);
+      --theme-highlight-border: #0070f3;
+      --theme-highlight-shadow: 0 10px 30px rgba(0, 112, 243, 0.25);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+      line-height: 1.6;
+    }
+
+    /* Navigation Header */
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      padding: 1.5rem 3rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: rgba(10, 13, 20, 0.85);
+      backdrop-filter: blur(10px);
+      z-index: 1000;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .logo { font-size: 1.25rem; font-weight: 700; letter-spacing: 0.05em; color: #fff; }
+    nav a { color: var(--text-muted); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; transition: 0.3s; }
+    nav a:hover { color: #fff; }
+
+    /* Section Layouts */
+    .section {
+      min-height: 100vh;
+      padding: 8rem 4rem 4rem 4rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+      border-bottom: 1px solid var(--border-color);
+    }
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; width: 100%; max-width: 1200px; margin: 0 auto; align-items: center; }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.9)), url('images/darkblue.jpg') center/cover;
+      text-align: center;
+      align-items: center;
+    }
+    .hero-content h1 { font-size: 3.5rem; margin-bottom: 1rem; font-weight: 700; }
+    .hero-content p { font-size: 1.25rem; color: var(--text-muted); max-width: 600px; margin: 0 auto; }
+
+    /* Highlighted Box Styling */
+    .theme-highlight-box {
+      background: var(--theme-highlight-bg);
+      border: 1px solid var(--theme-highlight-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--theme-highlight-shadow);
+    }
+
+    .section-subheading {
+      font-size: 1.1rem;
+      color: var(--accent-blue);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+    }
+
+    /* Integrated Brain Graphic */
+    .integrated-brain-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+    }
+    .integrated-brain-container::before {
+      content: "";
+      position: absolute;
+      width: 80%;
+      height: 80%;
+      background: radial-gradient(circle, rgba(0, 112, 243, 0.25) 0%, rgba(10, 13, 20, 0) 70%);
+      z-index: 1;
+      pointer-events: none;
+    }
+    img.integrated-brain-img {
+      width: 100%;
+      max-width: 520px;
+      height: auto;
+      object-fit: contain;
+      mix-blend-mode: lighten;
+      opacity: 0.9;
+      filter: contrast(1.1) brightness(1.05);
+      mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+      -webkit-mask-image: radial-gradient(circle, rgba(0,0,0,1) 60%, rgba(0,0,0,0) 100%);
+      z-index: 2;
+    }
+
+    /* Core Values 3-Card Grid */
+    .values-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.25rem;
+      margin-top: 0.75rem;
+    }
+    .value-flip-card {
+      height: 230px;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .value-flip-card .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      text-align: center;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    .value-flip-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+    .value-flip-card .flip-card-front, 
+    .value-flip-card .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      border-radius: 12px;
+      padding: 1.25rem;
+      box-sizing: border-box;
+    }
+    .value-flip-card .flip-card-front {
+      background: var(--card-bg);
+      border: 1px solid var(--border-color);
+    }
+    .value-flip-card .flip-card-front h4 { font-size: 1.05rem; color: #fff; font-weight: 600; margin-top: 0.75rem; }
+    .value-icon { width: 38px; height: 38px; color: var(--accent-cyan); filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.5)); }
+    .value-flip-card .flip-card-back {
+      transform: rotateY(180deg);
+      background: var(--theme-highlight-bg);
+      border: 1px solid var(--theme-highlight-border);
+      box-shadow: var(--theme-highlight-shadow);
+    }
+    .value-flip-card .flip-card-back h4 { font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 0.5rem; }
+    .value-flip-card .flip-card-back p { font-size: 0.82rem; color: var(--text-main); line-height: 1.45; }
+
+    /* WHY WE EXIST SECTION */
+    .why-section-bg {
+      background: linear-gradient(rgba(10, 13, 20, 0.88), rgba(10, 13, 20, 0.88)), url('images/backdrop2.jpg') center/cover no-repeat;
+    }
+
+    .why-horizontal-layout {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+      width: 100%;
+      align-items: stretch;
+    }
+
+    .subheading-box {
+      background: rgba(15, 23, 42, 0.92);
+      border: 1px solid var(--theme-highlight-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+      box-shadow: var(--theme-highlight-shadow);
+      backdrop-filter: blur(10px);
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .subheading-box-header h3 {
+      font-size: 1.15rem;
+      color: var(--accent-cyan);
+      margin-bottom: 0.5rem;
+      line-height: 1.35;
+      min-height: 3.1em;
+      display: flex;
+      align-items: flex-start;
+    }
+    .subheading-box-header p {
+      font-size: 0.85rem;
+      color: var(--text-main);
+      margin-bottom: 1.5rem;
+      line-height: 1.45;
+      min-height: 3.2em;
+      display: flex;
+      align-items: flex-start;
+    }
+
+    .cards-vertical-stack {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      flex-grow: 1;
+    }
+
+    .chart-mini-card {
+      height: 180px;
+      width: 100%;
+      perspective: 1000px;
+      cursor: pointer;
+    }
+    .chart-mini-card .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    .chart-mini-card:hover .flip-card-inner {
+      transform: rotateY(180deg);
+    }
+
+    .chart-mini-card .flip-card-front,
+    .chart-mini-card .flip-card-back {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    .chart-mini-card .flip-card-front {
+      background: rgba(10, 13, 20, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      padding: 1.25rem;
+      text-align: center;
+      gap: 0.75rem;
+    }
+
+    .card-icon {
+      width: 32px;
+      height: 32px;
+      color: var(--accent-cyan);
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.4));
+      flex-shrink: 0;
+    }
+
+    .chart-mini-card .flip-card-front h4 {
+      font-size: 0.92rem;
+      color: #fff;
+      font-weight: 600;
+      line-height: 1.35;
+    }
+
+    .chart-mini-card .flip-card-back {
+      transform: rotateY(180deg);
+      background: #fff;
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3);
+      overflow: hidden;
+      position: relative;
+      padding: 0;
+    }
+    .chart-mini-card .flip-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: #fff;
+      padding: 0.25rem;
+    }
+    .chart-mini-card .flip-card-back .chart-overlay-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 13, 20, 0.85);
+      color: var(--accent-cyan);
+      font-size: 0.68rem;
+      text-align: center;
+      padding: 0.25rem 0;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      backdrop-filter: blur(2px);
+    }
+
+    /* Process Flow / Subsection Styles */
+    .subsection-container {
+      width: 100%;
+      max-width: 1200px;
+      margin: 4rem auto 0 auto;
+      padding: 2.5rem;
+      background: rgba(15, 23, 42, 0.6);
+      border: 1px solid var(--border-color);
+      border-radius: 16px;
+      backdrop-filter: blur(10px);
+    }
+    .subsection-title {
+      font-size: 1.5rem;
+      color: var(--accent-cyan);
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      margin-bottom: 1.5rem;
+      text-transform: uppercase;
+    }
+    .process-banner { width: 100%; max-height: 260px; object-fit: cover; border-radius: 12px; border: 1px solid var(--border-color); margin-bottom: 2rem; }
+    .steps-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+    .step-card { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-color); border-radius: 0 0 8px 8px; display: flex; flex-direction: column; }
+    .step-header { background: #2563eb; color: #fff; padding: 0.6rem 0.5rem; font-weight: 700; font-size: 0.85rem; text-align: center; text-transform: uppercase; letter-spacing: 0.05em; clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 50%, calc(100% - 12px) 100%, 0 100%); }
+    .step-body { padding: 1.2rem 1rem; flex-grow: 1; }
+    .step-body h4 { font-size: 1rem; color: #38bdf8; margin-bottom: 0.75rem; }
+    .step-body ul { list-style: none; padding-left: 0; }
+    .step-body li { font-size: 0.82rem; color: var(--text-muted); margin-bottom: 0.5rem; line-height: 1.35; position: relative; padding-left: 10px; }
+    .step-body li::before { content: "•"; color: #38bdf8; position: absolute; left: 0; }
+
+    /* Offer Section Tiers */
+    .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem; }
+    .tier-card { background: rgba(255, 255, 255, 0.02); border: 1px solid var(--border-color); padding: 1.5rem; border-radius: 8px; }
+
+    /* Lightbox Modal Structure */
+    .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); }
+    .modal-content { background-color: #0d1117; margin: 3% auto; padding: 2.2rem; border: 1px solid var(--theme-highlight-border); border-radius: 12px; width: 85%; max-width: 820px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
+    .close-btn { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
+    .close-btn:hover { color: #fff; }
+    
+    .modal-card-title { color: var(--accent-cyan); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
+    .modal-card-desc { font-size: 0.92rem; color: var(--text-main); line-height: 1.5; margin-bottom: 1rem; background: rgba(255, 255, 255, 0.03); padding: 0.75rem; border-radius: 6px; border-left: 3px solid var(--accent-cyan); }
+    .modal-chart-title { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.75rem; }
+    .full-chart-display img { width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 8px; background: #fff; padding: 0.5rem; border: 1px solid var(--border-color); }
+    .citation { font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); font-style: italic; line-height: 1.4; }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="logo">COGAEGIS</div>
+    <nav>
+      <a href="#who">Who We Are</a>
+      <a href="#why">Why We Exist</a>
+      <a href="#what">What We Do</a>
+      <a href="#offer">What We Offer</a>
+    </nav>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="section hero">
+    <div class="hero-content">
+      <h1>CogAegis</h1>
+      <p>TRAIN the Mind to Master AI</p>
+    </div>
+  </section>
+
+  <!-- Section 1: Who We Are -->
+  <section id="who" class="section">
+    <div class="grid-2">
+      <div>
+        <h2>WHO WE ARE</h2>
+        <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">
+          CogAegis is an AI integration training firm that helps individuals and organizations adopt AI tools to boost productivity without sacrificing independent thinking. We offer AI literacy training at every level, from foundational tool use to building custom AI agents while preserving critical thinking.
+        </p>
+
+        <h3 class="section-subheading" style="margin-top: 1.75rem;">OUR MISSION</h3>
+        <div class="theme-highlight-box" style="margin-top: 0.5rem;">
+          <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">
+            To train individuals and organizations with the knowledge, tactics, and tools to deploy AI as a force multiplier for productivity while preserving human critical thinking and creative capacities.
+          </p>
+        </div>
+
+        <h3 class="section-subheading" style="margin-top: 1.75rem;">OUR CORE VALUES</h3>
+        <div class="values-grid">
+          <div class="value-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <svg class="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                <h4>Mind Over Matter</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Mind Over Matter</h4>
+                <p>Nothing can replace the beauty of the human mind for creativity, and therefore, we must actively defend it.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="value-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <svg class="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 3v2m6-2v2M9 19v2m6-2v2M3 9h2m-2 6h2m14-6h2m-2 6h2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
+                <h4>Smart AI Integration</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Smart AI Integration</h4>
+                <p>AI is essential for commercial survival, so we must learn to master it without compromising our independent reasoning.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="value-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <svg class="value-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4"></path></svg>
+                <h4>Tailored Solutions</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Tailored Solutions</h4>
+                <p>Every individual and organization faces unique needs and will require customized solutions.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="integrated-brain-container">
+        <img src="images/brain.png" alt="CogAegis Neural Vision" class="integrated-brain-img">
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 2: Why We Exist -->
+  <section id="why" class="section why-section-bg">
+    <div style="max-width: 1280px; margin: 0 auto; width: 100%;">
+      <h2>WHY WE EXIST</h2>
+      
+      <div class="why-horizontal-layout">
+        
+        <!-- Column 1 -->
+        <div class="subheading-box">
+          <div class="subheading-box-header">
+            <h3>To Increase AI Literacy for All</h3>
+            <p>We exist to teach individuals and organizations how to use and benefit from AI.</p>
+          </div>
+          <div class="cards-vertical-stack">
+            
+            <div class="chart-mini-card" onclick="openChartModal('Rapid Expansion of AI Adoption', 'As global usage accelerates exponentially, widespread AI literacy becomes necessary so everyone can effectively navigate and utilize these tools.', 'Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s)', 'images/exist1a.png', 'Statista. (January 19, 2026). Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s) [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/forecasts/1449844/ai-tool-users-worldwide/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                  <h4>Rapid Expansion of AI Adoption</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist1a.png" alt="Generative AI Users">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Bridging Workplace Skill Gaps', 'Skill shortages stand as the main barrier to AI adoption, proving the urgent need for structured literacy training across organizations.', 'Main obstacles to artificial intelligence (AI) adoption in global business in 2025', 'images/exist2a.png', 'World Economic Forum. (January 7, 2025). Main obstacles to artificial intelligence (AI) adoption in global business in 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1557024/barriers-ai-adoption/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
+                  <h4>Bridging Workplace Skill Gaps</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist2a.png" alt="AI Adoption Obstacles">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Surge in Enterprise AI Capital', 'Rapidly increasing commercial spend demands guided literacy to ensure enterprise AI investments deliver real operational value.', 'Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category', 'images/exist1b.png', 'Menlo Ventures. (December 9, 2025). Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1611933/generative-ai-spending-worldwide-by-category/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                  <h4>Surge in Enterprise AI Capital</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist1b.png" alt="GenAI Spending">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Column 2 -->
+        <div class="subheading-box">
+          <div class="subheading-box-header">
+            <h3>To Preserve Human Creativity and Critical Thinking</h3>
+            <p>We exist to protect human ingenuity and cognitive thinking while using AI tools.</p>
+          </div>
+          <div class="cards-vertical-stack">
+            
+            <div class="chart-mini-card" onclick="openChartModal('Preventing Skill Atrophy', 'Rising concern over cognitive decline highlights our mission to safeguard foundational reasoning skills against passive AI usage.', 'Teachers express worry over artificial intelligence\'s effect on critical skills in 2024, by AI user vs non AI user', 'images/exist1c.png', 'The Alan Turing Institute. (June 8, 2025). Teachers express worry over artificial intelligence\'s effect on critical skills in 2024, by AI user vs non AI user [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1616473/ai-critical-thinking-concerns/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
+                  <h4>Preventing Skill Atrophy</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist1c.png" alt="Teachers Worry on Skills">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Establishing Active Guardrails', 'Widespread student adoption demands intentional educational frameworks to build responsible, critical-thinking-first habits.', 'Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025', 'images/exist2c.png', 'KPMG International. (May 15, 2025). Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1615911/student-perspectives-on-ai-use-in-education/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
+                  <h4>Establishing Active Guardrails</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist2c.png" alt="Students Opinion on AI">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Protecting Independent Inquiry', 'Journalistic risks emphasize why we must defend truth, original analysis, and rigorous fact-checking in automated environments.', 'Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024', 'images/exist3c.png', 'Thomson Reuters. (January 27, 2025). Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1623863/risks-of-ai-in-journalism-worldwide/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                  <h4>Protecting Independent Inquiry</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist3c.png" alt="Risks to Journalism">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Column 3 -->
+        <div class="subheading-box">
+          <div class="subheading-box-header">
+            <h3>To Bring Balance to Organic & Artificial Intelligence</h3>
+            <p>We exist to harmonize cutting-edge AI tools to enhance human intellect and creativity and not replace it.</p>
+          </div>
+          <div class="cards-vertical-stack">
+            
+            <div class="chart-mini-card" onclick="openChartModal('Mitigating Synthesized Over-Reliance', 'Heavy reliance on automated task generation shows why teams need balanced workflows that center human strategy and oversight.', 'Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024', 'images/exist2b.png', 'Content Marketing Institute. (September 17, 2024). Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1499288/uses-genai-content-marketing-united-states/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
+                  <h4>Mitigating Synthesized Over-Reliance</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist2b.png" alt="Leading Uses of GenAI">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Valuing Human Authenticity', 'Shifting quality perceptions require frameworks that balance automated efficiency with genuine, irreplaceable organic perspective.', 'Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024', 'images/exist3b.png', 'Top10.com. (March 24, 2024). Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1461390/ai-generated-content-better-than-human-created-content/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 004 11c0 2.476.345 4.868.99 7.135"></path></svg>
+                  <h4>Valuing Human Authenticity</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist3b.png" alt="Opinion of AI Content">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="chart-mini-card" onclick="openChartModal('Navigating Consumer Trust Boundaries', 'Varying global willingness to delegate critical decisions underscores the necessity of maintaining human oversight in high-stakes domains.', 'Activities that worldwide consumers trust AI to do in place of human beings in 2024', 'images/exist4c.png', 'PwC. (May 14, 2024). Which activities would you trust AI to do accurately in place of human interaction? [Graph]. In Statista. Retrieved September 02, 2026, from https://www.statista.com/statistics/1475638/consumer-trust-in-ai-activities-globally/')">
+              <div class="flip-card-inner">
+                <div class="flip-card-front">
+                  <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
+                  <h4>Navigating Consumer Trust Boundaries</h4>
+                </div>
+                <div class="flip-card-back">
+                  <img src="images/exist4c.png" alt="Consumer Trust in AI Activities">
+                  <div class="chart-overlay-hint">Click to Enlarge Data</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: What We Do (Includes How We Do It Subsection) -->
+  <section id="what" class="section">
+    <!-- Core Overview -->
+    <div class="grid-2">
+      <div>
+        <img src="images/balance.png" alt="Cognitive Defense" style="width: 100%; border-radius: 12px; border: 1px solid var(--border-color);">
+      </div>
+      <div>
+        <h2>WHAT WE DO</h2>
+        <p style="margin-top: 1.5rem; color: var(--text-muted);">
+          We deliver AI literacy training across all skill levels alongside cognitive defense strategies that protect originality. Our specialized curriculum includes AI detection methodologies so teams can distinguish synthetic media, paired with custom AI agents and SOP frameworks that preserve human logic.
+        </p>
+      </div>
+    </div>
+
+    <!-- Subsection: How We Do It -->
+    <div class="subsection-container">
+      <h3 class="subsection-title">How We Do It</h3>
+      <img src="images/bot1.jpg" alt="How We Do It Process Graphic" class="process-banner">
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-header">STEP 1</div>
+          <div class="step-body">
+            <h4>Consultation</h4>
+            <ul>
+              <li>Identify Client's AI literacy level</li>
+              <li>Determine Client's AI literacy goals</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">STEP 2</div>
+          <div class="step-body">
+            <h4>Education</h4>
+            <ul>
+              <li>Deliver customized AI training session(s)</li>
+              <li>Re-Visit Client's AI literacy goals</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">STEP 3</div>
+          <div class="step-body">
+            <h4>Investigation</h4>
+            <ul>
+              <li>Identify areas in Client's operations for AI integration</li>
+              <li>Determine Client's AI integration goals</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">STEP 4</div>
+          <div class="step-body">
+            <h4>Creation</h4>
+            <ul>
+              <li>Build custom AI Agent(s) to integrate within Client's operations</li>
+              <li>Draft Client's AI standard operating procedures</li>
+            </ul>
+          </div>
+        </div>
+        <div class="step-card">
+          <div class="step-header">STEP 5</div>
+          <div class="step-body">
+            <h4>Integration</h4>
+            <ul>
+              <li>Introduce AI Agent(s) to existing operation</li>
+              <li>Fix and adjust the AI Agent(s) to meet Client's AI integration goals</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: What We Offer -->
+  <section id="offer" class="section">
+    <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+      <h2>WHAT WE OFFER</h2>
+      <p style="color: var(--accent-blue); font-weight: 600; margin-top: 0.5rem;">Initial 30 min Consultation — Complimentary</p>
+      
+      <div class="tiers">
+        <div class="tier-card">
+          <h4>Beginner</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Discover AI, Converse with AI, & Recognize Synthetic Media</p>
+        </div>
+        <div class="tier-card">
+          <h4>Intermediate</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Advanced Research, AI Creation, & AI Marketing Strategy</p>
+        </div>
+        <div class="tier-card">
+          <h4>Advanced</h4>
+          <p style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.5rem;">Custom AI Agent Development, Integration, & Tailored SOPs</p>
+        </div>
+      </div>
+
+      <div style="margin-top: 3rem;" class="grid-2">
+        <div class="theme-highlight-box">
+          <h3>Cognitive Defense Workshops</h3>
+          <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Interactive sessions focused on maintaining independent reasoning and evaluation standards within AI workflows.</p>
+        </div>
+        <div class="theme-highlight-box">
+          <h3>Enterprise Discoverability & SOPs</h3>
+          <p style="color: var(--text-muted); margin-top: 0.5rem; font-size: 0.9rem;">Audits, customized internal AI agents, and corporate standard operating procedures for secure scaling.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Global Lightbox Modal -->
+  <div id="chartModal" class="chart-modal" onclick="closeChartModal()">
+    <div class="modal-content" onclick="event.stopPropagation()">
+      <span class="close-btn" onclick="closeChartModal()">&times;</span>
+      
+      <div class="modal-card-title" id="modalCardTitle">Title</div>
+      <div class="modal-card-desc" id="modalCardDesc">Description</div>
+      <div class="modal-chart-title" id="modalChartTitle">Chart Title</div>
+      
+      <div class="full-chart-display">
+        <img id="modalImage" src="" alt="Expanded Chart Data">
+      </div>
+      
+      <p class="citation" id="modalCitation"></p>
+    </div>
+  </div>
+
+  <script>
+    function openChartModal(cardTitle, cardDesc, chartTitle, imageSrc, citation) {
+      document.getElementById('modalCardTitle').innerText = cardTitle;
+      document.getElementById('modalCardDesc').innerText = cardDesc;
+      document.getElementById('modalChartTitle').innerText = 'Figure Data: ' + chartTitle;
+      document.getElementById('modalImage').src = imageSrc;
+      document.getElementById('modalCitation').innerText = citation;
+      document.getElementById('chartModal').style.display = "block";
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeChartModal() {
+      document.getElementById('chartModal').style.display = "none";
+      document.body.style.overflow = "auto";
+    }
+  </script>
+
+</body>
+</html>
