@@ -21,12 +21,17 @@
       --theme-highlight-shadow: 0 10px 30px rgba(0, 112, 243, 0.25);
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: 'Inter', sans-serif;
       background-color: var(--bg-dark);
       color: var(--text-main);
       line-height: 1.6;
+      overflow-x: hidden;
     }
 
     h2 { font-size: 2.2rem; font-weight: 700; letter-spacing: 0.05em; }
@@ -36,54 +41,88 @@
       position: fixed;
       top: 0;
       width: 100%;
-      padding: 1.5rem 3rem;
+      padding: 1.25rem 2rem;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      background: rgba(10, 13, 20, 0.85);
+      background: rgba(10, 13, 20, 0.92);
       backdrop-filter: blur(10px);
       z-index: 1000;
       border-bottom: 1px solid var(--border-color);
     }
-    .logo { font-size: 1.25rem; letter-spacing: 0.05em; color: #fff; }
+    
+    header .logo,
+    header .logo:visited,
+    header .logo:hover,
+    header .logo:active { 
+      font-size: 1.25rem; 
+      letter-spacing: 0.05em; 
+      color: #fff; 
+      text-decoration: none !important;
+      cursor: pointer;
+      display: inline-block;
+      flex-shrink: 0;
+    }
+    
     .logo-cog { font-weight: 300; }
     .logo-aegis { font-weight: 700; }
-    nav a { color: var(--text-muted); text-decoration: none; margin-left: 2rem; font-size: 0.9rem; transition: 0.3s; }
+    
+    nav {
+      display: flex;
+      align-items: center;
+      gap: 1.5rem;
+    }
+    
+    nav a { 
+      color: var(--text-muted); 
+      text-decoration: none; 
+      font-size: 0.9rem; 
+      transition: 0.3s; 
+      white-space: nowrap;
+    }
     nav a:hover { color: #fff; }
 
     /* Section Layouts */
     .section {
       min-height: 100vh;
-      padding: 8rem 4rem 4rem 4rem;
+      padding: 7rem 2rem 4rem 2rem;
       display: flex;
       flex-direction: column;
       justify-content: center;
       position: relative;
       border-bottom: 1px solid var(--border-color);
     }
-    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; width: 100%; max-width: 1200px; margin: 0 auto; align-items: center; }
+    .grid-2 { 
+      display: grid; 
+      grid-template-columns: 1fr 1fr; 
+      gap: 3rem; 
+      width: 100%; 
+      max-width: 1200px; 
+      margin: 0 auto; 
+      align-items: center; 
+    }
 
-/* Hero Section */
-.hero {
-  background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.9)), url('images/darkblue.jpg') center/cover;
-  text-align: center;
-  align-items: center;
-}
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.9)), url('images/darkblue.jpg') center/cover;
+      text-align: center;
+      align-items: center;
+    }
 
-.hero-content h1 { 
-  font-size: 3.5rem; 
-  margin-bottom: 0; 
-  line-height: 1; 
-}
+    .hero-content h1 { 
+      font-size: 3.5rem; 
+      margin-bottom: 0; 
+      line-height: 1; 
+    }
 
-.hero-content p { 
-  font-size: 1.25rem; 
-  color: var(--text-muted); 
-  max-width: 600px; 
-  margin: 0.25rem auto 0 auto; /* Tiny 4px top margin to prevent overlapping */
-  line-height: 1.1; 
-  font-weight: 400; 
-}
+    .hero-content p { 
+      font-size: 1.25rem; 
+      color: var(--text-muted); 
+      max-width: 600px; 
+      margin: 0.5rem auto 0 auto; 
+      line-height: 1.2; 
+      font-weight: 400; 
+    }
 
     /* Highlighted Box Styling */
     .theme-highlight-box {
@@ -333,7 +372,6 @@
       border: none;
     }
     
-    /* How We Do It Title Styling */
     .subsection-title {
       font-size: 1.8rem;
       color: var(--accent-blue);
@@ -344,7 +382,6 @@
       text-align: center;
     }
 
-    /* Process Banner Image */
     .process-banner { 
       width: 100%; 
       max-height: 380px; 
@@ -491,14 +528,14 @@
 
     .offerings-sublist {
       list-style: none;
-      padding-left: 2rem;
+      padding-left: 1.5rem;
       margin-top: 0.75rem;
       margin-bottom: 0.75rem;
     }
 
     .offerings-sublist > li {
       position: relative;
-      padding-left: 2rem;
+      padding-left: 1.5rem;
       margin-bottom: 0.85rem;
       font-size: 1.05rem;
       color: #d1d5db;
@@ -588,13 +625,114 @@
     .modal-chart-title { font-size: 0.85rem; color: var(--text-muted); font-style: italic; margin-bottom: 0.75rem; }
     .full-chart-display img { width: 100%; height: auto; max-height: 480px; object-fit: contain; border-radius: 8px; background: #fff; padding: 0.5rem; border: 1px solid var(--border-color); }
     .citation { font-size: 0.78rem; color: var(--text-muted); margin-top: 1rem; padding-top: 0.75rem; border-top: 1px solid var(--border-color); font-style: italic; line-height: 1.4; }
+
+    /* ==========================================================================
+       MOBILE RESPONSIVE MEDIA QUERIES
+       ========================================================================== */
+
+    /* Tablet & Medium Screens (Under 900px) */
+    @media (max-width: 900px) {
+      header {
+        padding: 1rem 1.25rem;
+        flex-direction: column;
+        gap: 0.75rem;
+        align-items: center;
+      }
+
+      nav {
+        overflow-x: auto;
+        width: 100%;
+        justify-content: flex-start;
+        padding-bottom: 0.25rem;
+        gap: 1.25rem;
+        -webkit-overflow-scrolling: touch;
+      }
+
+      .section {
+        padding: 8.5rem 1.5rem 3rem 1.5rem;
+        min-height: auto;
+      }
+
+      .grid-2 {
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+
+      .integrated-brain-container {
+        order: -1;
+      }
+
+      .why-horizontal-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .subheading-box-header h3, 
+      .subheading-box-header p {
+        min-height: auto;
+      }
+
+      .steps-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .modal-content {
+        width: 92%;
+        margin: 10% auto;
+        padding: 1.5rem;
+      }
+    }
+
+    /* Mobile Phones (Under 600px) */
+    @media (max-width: 600px) {
+      h2 {
+        font-size: 1.6rem;
+      }
+
+      .hero-content h1 {
+        font-size: 2.5rem;
+      }
+
+      .hero-content p {
+        font-size: 1rem;
+      }
+
+      .values-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .steps-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .offerings-list > li {
+        font-size: 1.05rem;
+        padding-left: 1.5rem;
+      }
+
+      .offerings-sublist > li {
+        font-size: 0.95rem;
+        padding-left: 1.25rem;
+      }
+
+      .contact-form-container {
+        padding: 1.5rem;
+      }
+
+      .value-flip-card,
+      .chart-mini-card,
+      .step-flip-card {
+        height: auto;
+        min-height: 200px;
+      }
+    }
   </style>
 </head>
 <body>
 
   <!-- Header -->
-<header>
-    <a href="#" class="logo" style="text-decoration: none;"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></a>
+  <header>
+    <a href="#" class="logo"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></a>
     <nav>
       <a href="#who">Who We Are</a>
       <a href="#why">Why We Exist</a>
