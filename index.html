@@ -176,6 +176,7 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 1.25rem;
       margin-top: 0.75rem;
+      position: relative;
     }
     .value-flip-card {
       height: 230px;
@@ -229,7 +230,7 @@
       box-shadow: var(--theme-highlight-shadow);
     }
     .value-flip-card .flip-card-back h4 { font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 0.5rem; }
-    .value-flip-card .flip-card-back p { font-size: 0.82rem; color: var(--text-main); line-height: 1.45; }
+    .value-flip-card .flip-card-back p { font-size: 0.85rem; color: var(--text-main); line-height: 1.45; }
 
     /* WHY WE EXIST SECTION */
     .why-section-bg {
@@ -281,6 +282,7 @@
       flex-direction: column;
       gap: 1rem;
       flex-grow: 1;
+      position: relative;
     }
 
     .chart-mini-card {
@@ -638,10 +640,8 @@
     }
 
     /* Lightbox Modal Structure */
-    .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); }
-    .modal-content { background-color: #0d1117; margin: 3% auto; padding: 2.2rem; border: 1px solid var(--theme-highlight-border); border-radius: 12px; width: 85%; max-width: 820px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); }
-    .close-btn { color: #aaa; position: absolute; top: 15px; right: 25px; font-size: 35px; font-weight: bold; cursor: pointer; }
-    .close-btn:hover { color: #fff; }
+    .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); cursor: pointer; }
+    .modal-content { background-color: #0d1117; margin: 3% auto; padding: 2.2rem; border: 1px solid var(--theme-highlight-border); border-radius: 12px; width: 85%; max-width: 820px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); cursor: default; }
     
     .modal-card-title { color: var(--accent-cyan); font-size: 1.15rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.4rem; }
     .modal-card-desc { font-size: 0.92rem; color: var(--text-main); line-height: 1.5; margin-bottom: 1rem; background: rgba(255, 255, 255, 0.03); padding: 0.75rem; border-radius: 6px; border-left: 3px solid var(--accent-cyan); }
@@ -708,7 +708,6 @@
 
     /* Mobile Phones (Under 600px) STRICT OVERRIDES */
     @media (max-width: 600px) {
-      /* 1. Eliminate dead space between Hero and Brain graphic */
       .hero {
         min-height: auto !important;
         padding-top: 5.5rem !important;
@@ -744,13 +743,14 @@
         font-size: 0.95rem;
       }
 
-      /* 2. Core Values: 3 Horizontal Square Cards with Expansion */
+      /* Core Values Grid Mobile Layout Fixes */
       .values-grid {
         display: flex !important;
         flex-direction: row !important;
         gap: 0.5rem !important;
         width: 100%;
         align-items: flex-start;
+        position: relative;
       }
 
       .value-flip-card {
@@ -758,18 +758,26 @@
         aspect-ratio: 1 / 1;
         height: auto !important;
         min-height: unset !important;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.3s ease;
+        position: relative;
+        z-index: 1;
       }
 
+      /* Fixed overlay behavior: expands downwards over siblings without resizing unselected cards */
       .value-flip-card.is-flipped {
-        flex: 1 1 100%;
-        aspect-ratio: auto;
-        min-height: 140px !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: auto !important;
+        min-height: 180px !important;
+        z-index: 100 !important;
+        aspect-ratio: auto !important;
       }
 
       .value-flip-card .flip-card-front, 
       .value-flip-card .flip-card-back {
-        padding: 0.5rem !important;
+        padding: 0.75rem !important;
       }
 
       .value-flip-card .flip-card-front h4 {
@@ -778,12 +786,17 @@
         line-height: 1.1;
       }
 
+      .value-flip-card .flip-card-back p {
+        font-size: 0.85rem !important;
+        line-height: 1.4 !important;
+      }
+
       .value-icon {
         width: 24px !important;
         height: 24px !important;
       }
 
-      /* 3. Why We Exist: Stacked Vertically, Horizontal Square Cards inside each section */
+      /* Why We Exist Section Mobile Layout Fixes */
       .why-horizontal-layout {
         display: flex !important;
         flex-direction: column !important;
@@ -796,6 +809,7 @@
         gap: 0.5rem !important;
         width: 100%;
         align-items: flex-start;
+        position: relative;
       }
 
       .chart-mini-card {
@@ -803,13 +817,20 @@
         aspect-ratio: 1 / 1;
         height: auto !important;
         min-height: unset !important;
-        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        transition: opacity 0.3s ease;
+        position: relative;
+        z-index: 1;
       }
 
+      /* Expanded mini chart card over siblings */
       .chart-mini-card.is-flipped {
-        flex: 1 1 100%;
-        aspect-ratio: auto;
-        min-height: 160px !important;
+        position: absolute !important;
+        top: 0;
+        left: 0;
+        width: 100% !important;
+        height: 200px !important;
+        z-index: 100 !important;
+        aspect-ratio: auto !important;
       }
 
       .chart-mini-card .flip-card-front {
@@ -827,7 +848,7 @@
         height: 22px !important;
       }
 
-      /* 4. How We Do It Steps on Mobile */
+      /* Steps on Mobile */
       .steps-grid {
         grid-template-columns: 1fr;
         gap: 0.75rem;
@@ -1272,8 +1293,6 @@
   <!-- Global Lightbox Modal -->
   <div id="chartModal" class="chart-modal" onclick="closeChartModal()">
     <div class="modal-content" onclick="event.stopPropagation()">
-      <span class="close-btn" onclick="closeChartModal()">&times;</span>
-      
       <div class="modal-card-title" id="modalCardTitle">Title</div>
       <div class="modal-card-desc" id="modalCardDesc">Description</div>
       <div class="modal-chart-title" id="modalChartTitle">Chart Title</div>
@@ -1319,11 +1338,11 @@
     // Card Interaction Handlers for Desktop & Mobile
     document.addEventListener('DOMContentLoaded', () => {
       
-      // Values, Chart Cards, & How We Do It Steps
       const allCards = document.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card');
 
       allCards.forEach(card => {
         card.addEventListener('click', (e) => {
+          e.stopPropagation();
           const isMobile = window.innerWidth <= 600;
 
           // Why We Exist Cards: Open modal if flipped or on desktop
@@ -1340,21 +1359,51 @@
             }
           }
 
-          // Mobile Horizontal Flip/Expand Toggle
+          // Mobile Horizontal Flip/Expand Overlay Toggle
           if (isMobile) {
             const parentContainer = card.parentElement;
+            const isCurrentlyFlipped = card.classList.contains('is-flipped');
             
-            // Collapse other active cards in the same row
+            // Collapse all siblings in current row and make them visible again
             if (parentContainer) {
               parentContainer.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card').forEach(sibling => {
-                if (sibling !== card) sibling.classList.remove('is-flipped');
+                sibling.classList.remove('is-flipped');
+                sibling.style.opacity = '1';
+                sibling.style.pointerEvents = 'auto';
               });
             }
 
-            // Toggle target card state
-            card.classList.toggle('is-flipped');
+            // If card was not flipped before, expand overlay and hide unselected siblings behind
+            if (!isCurrentlyFlipped) {
+              card.classList.add('is-flipped');
+              if (parentContainer) {
+                parentContainer.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card').forEach(sibling => {
+                  if (sibling !== card) {
+                    sibling.style.opacity = '0';
+                    sibling.style.pointerEvents = 'none';
+                  }
+                });
+              }
+            }
           }
         });
+      });
+
+      // Global click listener to close flipped cards or modals when tapping outside
+      document.addEventListener('click', (e) => {
+        const isMobile = window.innerWidth <= 600;
+        if (isMobile) {
+          document.querySelectorAll('.value-flip-card.is-flipped, .chart-mini-card.is-flipped, .step-flip-card.is-flipped').forEach(flippedCard => {
+            flippedCard.classList.remove('is-flipped');
+            const parentContainer = flippedCard.parentElement;
+            if (parentContainer) {
+              parentContainer.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card').forEach(sibling => {
+                sibling.style.opacity = '1';
+                sibling.style.pointerEvents = 'auto';
+              });
+            }
+          });
+        }
       });
     });
   </script>
