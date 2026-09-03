@@ -190,9 +190,17 @@
       transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform-style: preserve-3d;
     }
-    .value-flip-card:hover .flip-card-inner {
+    
+    @media (min-width: 601px) {
+      .value-flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .value-flip-card.is-flipped .flip-card-inner {
       transform: rotateY(180deg);
     }
+
     .value-flip-card .flip-card-front, 
     .value-flip-card .flip-card-back {
       position: absolute;
@@ -288,7 +296,14 @@
       transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform-style: preserve-3d;
     }
-    .chart-mini-card:hover .flip-card-inner {
+    
+    @media (min-width: 601px) {
+      .chart-mini-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .chart-mini-card.is-flipped .flip-card-inner {
       transform: rotateY(180deg);
     }
 
@@ -412,9 +427,17 @@
       transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       transform-style: preserve-3d;
     }
-    .step-flip-card:hover .flip-card-inner {
+    
+    @media (min-width: 601px) {
+      .step-flip-card:hover .flip-card-inner {
+        transform: rotateY(180deg);
+      }
+    }
+
+    .step-flip-card.is-flipped .flip-card-inner {
       transform: rotateY(180deg);
     }
+
     .step-flip-card .flip-card-front,
     .step-flip-card .flip-card-back {
       position: absolute;
@@ -683,26 +706,135 @@
       }
     }
 
-    /* Mobile Phones (Under 600px) */
+    /* Mobile Phones (Under 600px) STRICT OVERRIDES */
     @media (max-width: 600px) {
+      /* 1. Eliminate dead space between Hero and Brain graphic */
+      .hero {
+        min-height: auto !important;
+        padding-top: 5.5rem !important;
+        padding-bottom: 1rem !important;
+      }
+
+      #who {
+        padding-top: 0.5rem !important;
+      }
+
+      #who .grid-2 {
+        gap: 1rem !important;
+      }
+
+      .integrated-brain-container {
+        margin-top: 0 !important;
+        margin-bottom: 0.5rem !important;
+      }
+
+      img.integrated-brain-img {
+        max-width: 280px !important;
+      }
+
       h2 {
-        font-size: 1.6rem;
+        font-size: 1.5rem;
       }
 
       .hero-content h1 {
-        font-size: 2.5rem;
+        font-size: 2.3rem;
       }
 
       .hero-content p {
-        font-size: 1rem;
+        font-size: 0.95rem;
       }
 
+      /* 2. Core Values: 3 Horizontal Square Cards with Expansion */
       .values-grid {
-        grid-template-columns: 1fr;
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        width: 100%;
+        align-items: flex-start;
       }
 
+      .value-flip-card {
+        flex: 1 1 30%;
+        aspect-ratio: 1 / 1;
+        height: auto !important;
+        min-height: unset !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .value-flip-card.is-flipped {
+        flex: 1 1 100%;
+        aspect-ratio: auto;
+        min-height: 140px !important;
+      }
+
+      .value-flip-card .flip-card-front, 
+      .value-flip-card .flip-card-back {
+        padding: 0.5rem !important;
+      }
+
+      .value-flip-card .flip-card-front h4 {
+        font-size: 0.72rem !important;
+        margin-top: 0.25rem !important;
+        line-height: 1.1;
+      }
+
+      .value-icon {
+        width: 24px !important;
+        height: 24px !important;
+      }
+
+      /* 3. Why We Exist: Stacked Vertically, Horizontal Square Cards inside each section */
+      .why-horizontal-layout {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 1.25rem !important;
+      }
+
+      .cards-vertical-stack {
+        display: flex !important;
+        flex-direction: row !important;
+        gap: 0.5rem !important;
+        width: 100%;
+        align-items: flex-start;
+      }
+
+      .chart-mini-card {
+        flex: 1 1 30%;
+        aspect-ratio: 1 / 1;
+        height: auto !important;
+        min-height: unset !important;
+        transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      .chart-mini-card.is-flipped {
+        flex: 1 1 100%;
+        aspect-ratio: auto;
+        min-height: 160px !important;
+      }
+
+      .chart-mini-card .flip-card-front {
+        padding: 0.4rem !important;
+        gap: 0.25rem !important;
+      }
+
+      .chart-mini-card .flip-card-front h4 {
+        font-size: 0.68rem !important;
+        line-height: 1.1;
+      }
+
+      .card-icon {
+        width: 22px !important;
+        height: 22px !important;
+      }
+
+      /* 4. How We Do It Steps on Mobile */
       .steps-grid {
         grid-template-columns: 1fr;
+        gap: 0.75rem;
+      }
+
+      .step-flip-card {
+        height: 180px;
       }
 
       .offerings-list > li {
@@ -716,14 +848,7 @@
       }
 
       .contact-form-container {
-        padding: 1.5rem;
-      }
-
-      .value-flip-card,
-      .chart-mini-card,
-      .step-flip-card {
-        height: auto;
-        min-height: 200px;
+        padding: 1.25rem;
       }
     }
   </style>
@@ -830,7 +955,7 @@
           </div>
           <div class="cards-vertical-stack">
             
-            <div class="chart-mini-card" onclick="openChartModal('Rapid Expansion of AI Adoption', 'As global usage accelerates exponentially, widespread AI literacy becomes necessary so everyone can effectively navigate and utilize these tools.', 'Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s)', 'images/exist1a.png', 'Statista. (January 19, 2026). Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s) [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/forecasts/1449844/ai-tool-users-worldwide/')">
+            <div class="chart-mini-card" data-modal-title="Rapid Expansion of AI Adoption" data-modal-desc="As global usage accelerates exponentially, widespread AI literacy becomes necessary so everyone can effectively navigate and utilize these tools." data-chart-title="Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s)" data-img="images/exist1a.png" data-citation="Statista. (January 19, 2026). Number of users of generative AI worldwide from 2020 to 2032 (in 1,000s) [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/forecasts/1449844/ai-tool-users-worldwide/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
@@ -843,7 +968,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Bridging Workplace Skill Gaps', 'Skill shortages stand as the main barrier to AI adoption, proving the urgent need for structured literacy training across organizations.', 'Main obstacles to artificial intelligence (AI) adoption in global business in 2025', 'images/exist2a.png', 'World Economic Forum. (January 7, 2025). Main obstacles to artificial intelligence (AI) adoption in global business in 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1557024/barriers-ai-adoption/')">
+            <div class="chart-mini-card" data-modal-title="Bridging Workplace Skill Gaps" data-modal-desc="Skill shortages stand as the main barrier to AI adoption, proving the urgent need for structured literacy training across organizations." data-chart-title="Main obstacles to artificial intelligence (AI) adoption in global business in 2025" data-img="images/exist2a.png" data-citation="World Economic Forum. (January 7, 2025). Main obstacles to artificial intelligence (AI) adoption in global business in 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1557024/barriers-ai-adoption/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M11 4a2 2 0 114 0v1a1 1 0 001 1h3a1 1 0 011 1v3a1 1 0 01-1 1h-1a2 2 0 100 4h1a1 1 0 011 1v3a1 1 0 01-1 1h-3a1 1 0 01-1-1v-1a2 2 0 10-4 0v1a1 1 0 01-1 1H7a1 1 0 01-1-1v-3a1 1 0 00-1-1H4a2 2 0 110-4h1a1 1 0 001-1V7a1 1 0 011-1h3a1 1 0 001-1V4z"></path></svg>
@@ -856,7 +981,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Surge in Enterprise AI Capital', 'Rapidly increasing commercial spend demands guided literacy to ensure enterprise AI investments deliver real operational value.', 'Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category', 'images/exist1b.png', 'Menlo Ventures. (December 9, 2025). Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1611933/generative-ai-spending-worldwide-by-category/')">
+            <div class="chart-mini-card" data-modal-title="Surge in Enterprise AI Capital" data-modal-desc="Rapidly increasing commercial spend demands guided literacy to ensure enterprise AI investments deliver real operational value." data-chart-title="Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category" data-img="images/exist1b.png" data-citation="Menlo Ventures. (December 9, 2025). Generative artificial intelligence (AI) spending by global businesses in the United States from 2023 to 2025, by category [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1611933/generative-ai-spending-worldwide-by-category/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
@@ -880,7 +1005,7 @@
           </div>
           <div class="cards-vertical-stack">
             
-            <div class="chart-mini-card" onclick="openChartModal('Preventing Skill Atrophy', 'Rising concern over cognitive decline highlights our mission to safeguard foundational reasoning skills against passive AI usage.', 'Teachers express worry over artificial intelligence\'s effect on critical skills in 2024, by AI user vs non AI user', 'images/exist1c.png', 'The Alan Turing Institute. (June 8, 2025). Teachers express worry over artificial intelligence\'s effect on critical skills in 2024, by AI user vs non AI user [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1616473/ai-critical-thinking-concerns/')">
+            <div class="chart-mini-card" data-modal-title="Preventing Skill Atrophy" data-modal-desc="Rising concern over cognitive decline highlights our mission to safeguard foundational reasoning skills against passive AI usage." data-chart-title="Teachers express worry over artificial intelligence's effect on critical skills in 2024, by AI user vs non AI user" data-img="images/exist1c.png" data-citation="The Alan Turing Institute. (June 8, 2025). Teachers express worry over artificial intelligence's effect on critical skills in 2024, by AI user vs non AI user [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1616473/ai-critical-thinking-concerns/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 01-2 2h-0a2 2 0 01-2-2v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path></svg>
@@ -893,7 +1018,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Establishing Active Guardrails', 'Widespread student adoption demands intentional educational frameworks to build responsible, critical-thinking-first habits.', 'Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025', 'images/exist2c.png', 'KPMG International. (May 15, 2025). Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1615911/student-perspectives-on-ai-use-in-education/')">
+            <div class="chart-mini-card" data-modal-title="Establishing Active Guardrails" data-modal-desc="Widespread student adoption demands intentional educational frameworks to build responsible, critical-thinking-first habits." data-chart-title="Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025" data-img="images/exist2c.png" data-citation="KPMG International. (May 15, 2025). Opinion of students on the use of artificial intelligence (AI) tools in education as of January 2025 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1615911/student-perspectives-on-ai-use-in-education/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
@@ -906,7 +1031,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Protecting Independent Inquiry', 'Journalistic risks emphasize why we must defend truth, original analysis, and rigorous fact-checking in automated environments.', 'Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024', 'images/exist3c.png', 'Thomson Reuters. (January 27, 2025). Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1623863/risks-of-ai-in-journalism-worldwide/')">
+            <div class="chart-mini-card" data-modal-title="Protecting Independent Inquiry" data-modal-desc="Journalistic risks emphasize why we must defend truth, original analysis, and rigorous fact-checking in automated environments." data-chart-title="Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024" data-img="images/exist3c.png" data-citation="Thomson Reuters. (January 27, 2025). Potential long-term risks of the increasing use of artificial intelligence (AI) to journalism according to journalists worldwide as of November 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1623863/risks-of-ai-in-journalism-worldwide/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
@@ -930,7 +1055,7 @@
           </div>
           <div class="cards-vertical-stack">
             
-            <div class="chart-mini-card" onclick="openChartModal('Mitigating Synthesized Over-Reliance', 'Heavy reliance on automated task generation shows why teams need balanced workflows that center human strategy and oversight.', 'Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024', 'images/exist2b.png', 'Content Marketing Institute. (September 17, 2024). Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1499288/uses-genai-content-marketing-united-states/')">
+            <div class="chart-mini-card" data-modal-title="Mitigating Synthesized Over-Reliance" data-modal-desc="Heavy reliance on automated task generation shows why teams need balanced workflows that center human strategy and oversight." data-chart-title="Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024" data-img="images/exist2b.png" data-citation="Content Marketing Institute. (September 17, 2024). Leading uses of generative artificial intelligence (GenAI) for content tasks among marketers in the United States as of May 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1499288/uses-genai-content-marketing-united-states/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3"></path></svg>
@@ -943,7 +1068,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Valuing Human Authenticity', 'Shifting quality perceptions require frameworks that balance automated efficiency with genuine, irreplaceable organic perspective.', 'Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024', 'images/exist3b.png', 'Top10.com. (March 24, 2024). Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1461390/ai-generated-content-better-than-human-created-content/')">
+            <div class="chart-mini-card" data-modal-title="Valuing Human Authenticity" data-modal-desc="Shifting quality perceptions require frameworks that balance automated efficiency with genuine, irreplaceable organic perspective." data-chart-title="Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024" data-img="images/exist3b.png" data-citation="Top10.com. (March 24, 2024). Opinion of AI-generated content being better than human-created content among consumers in the United States as of 2024 [Graph]. In Statista. Retrieved August 02, 2026, from https://www.statista.com/statistics/1461390/ai-generated-content-better-than-human-created-content/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 004 11c0 2.476.345 4.868.99 7.135"></path></svg>
@@ -956,7 +1081,7 @@
               </div>
             </div>
 
-            <div class="chart-mini-card" onclick="openChartModal('Navigating Consumer Trust Boundaries', 'Varying global willingness to delegate critical decisions underscores the necessity of maintaining human oversight in high-stakes domains.', 'Activities that worldwide consumers trust AI to do in place of human beings in 2024', 'images/exist4c.png', 'PwC. (May 14, 2024). Which activities would you trust AI to do accurately in place of human interaction? [Graph]. In Statista. Retrieved September 02, 2026, from https://www.statista.com/statistics/1475638/consumer-trust-in-ai-activities-globally/')">
+            <div class="chart-mini-card" data-modal-title="Navigating Consumer Trust Boundaries" data-modal-desc="Varying global willingness to delegate critical decisions underscores the necessity of maintaining human oversight in high-stakes domains." data-chart-title="Activities that worldwide consumers trust AI to do in place of human beings in 2024" data-img="images/exist4c.png" data-citation="PwC. (May 14, 2024). Which activities would you trust AI to do accurately in place of human interaction? [Graph]. In Statista. Retrieved September 02, 2026, from https://www.statista.com/statistics/1475638/consumer-trust-in-ai-activities-globally/">
               <div class="flip-card-inner">
                 <div class="flip-card-front">
                   <svg class="card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path></svg>
@@ -1175,6 +1300,7 @@
   </footer>
 
   <script>
+    // Global Modal Functions
     function openChartModal(cardTitle, cardDesc, chartTitle, imageSrc, citation) {
       document.getElementById('modalCardTitle').innerText = cardTitle;
       document.getElementById('modalCardDesc').innerText = cardDesc;
@@ -1189,6 +1315,48 @@
       document.getElementById('chartModal').style.display = "none";
       document.body.style.overflow = "auto";
     }
+
+    // Card Interaction Handlers for Desktop & Mobile
+    document.addEventListener('DOMContentLoaded', () => {
+      
+      // Values, Chart Cards, & How We Do It Steps
+      const allCards = document.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card');
+
+      allCards.forEach(card => {
+        card.addEventListener('click', (e) => {
+          const isMobile = window.innerWidth <= 600;
+
+          // Why We Exist Cards: Open modal if flipped or on desktop
+          if (card.classList.contains('chart-mini-card')) {
+            if (!isMobile || card.classList.contains('is-flipped')) {
+              openChartModal(
+                card.dataset.modalTitle,
+                card.dataset.modalDesc,
+                card.dataset.chartTitle,
+                card.dataset.img,
+                card.dataset.citation
+              );
+              return;
+            }
+          }
+
+          // Mobile Horizontal Flip/Expand Toggle
+          if (isMobile) {
+            const parentContainer = card.parentElement;
+            
+            // Collapse other active cards in the same row
+            if (parentContainer) {
+              parentContainer.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card').forEach(sibling => {
+                if (sibling !== card) sibling.classList.remove('is-flipped');
+              });
+            }
+
+            // Toggle target card state
+            card.classList.toggle('is-flipped');
+          }
+        });
+      });
+    });
   </script>
 
 </body>
