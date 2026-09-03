@@ -79,6 +79,7 @@
       font-size: 0.9rem; 
       transition: 0.3s; 
       white-space: nowrap;
+      text-align: center;
     }
     nav a:hover { color: #fff; }
 
@@ -107,6 +108,7 @@
       background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.9)), url('images/darkblue.jpg') center/cover;
       text-align: center;
       align-items: center;
+      padding-top: 8rem;
     }
 
     .hero-content h1 { 
@@ -663,12 +665,10 @@
       }
 
       nav {
-        overflow-x: auto;
         width: 100%;
-        justify-content: flex-start;
+        justify-content: center;
         padding-bottom: 0.25rem;
-        gap: 1.25rem;
-        -webkit-overflow-scrolling: touch;
+        gap: 1rem;
       }
 
       .section {
@@ -708,14 +708,35 @@
 
     /* Mobile Phones (Under 600px) STRICT OVERRIDES */
     @media (max-width: 600px) {
+      header {
+        padding: 0.75rem 0.5rem !important;
+        position: fixed !important;
+      }
+
+      nav {
+        display: flex !important;
+        flex-wrap: wrap !important;
+        justify-content: center !important;
+        gap: 0.5rem 0.75rem !important;
+        overflow-x: visible !important;
+      }
+
+      nav a {
+        font-size: 0.72rem !important;
+        line-height: 1.15 !important;
+        text-align: center !important;
+        display: inline-block !important;
+        white-space: normal !important;
+      }
+
       .hero {
         min-height: auto !important;
-        padding-top: 5.5rem !important;
-        padding-bottom: 1rem !important;
+        padding-top: 9.5rem !important;
+        padding-bottom: 2rem !important;
       }
 
       #who {
-        padding-top: 0.5rem !important;
+        padding-top: 1.5rem !important;
       }
 
       #who .grid-2 {
@@ -763,21 +784,24 @@
         z-index: 1;
       }
 
-      /* Fixed overlay behavior: expands downwards over siblings without resizing unselected cards */
+      /* Fixed overlay behavior: expands downwards over siblings with full wrapping background */
       .value-flip-card.is-flipped {
         position: absolute !important;
         top: 0;
         left: 0;
         width: 100% !important;
-        height: auto !important;
-        min-height: 180px !important;
+        height: max-content !important;
+        min-height: 100% !important;
         z-index: 100 !important;
         aspect-ratio: auto !important;
       }
 
       .value-flip-card .flip-card-front, 
       .value-flip-card .flip-card-back {
-        padding: 0.75rem !important;
+        padding: 0.85rem !important;
+        height: 100% !important;
+        min-height: max-content !important;
+        box-sizing: border-box !important;
       }
 
       .value-flip-card .flip-card-front h4 {
@@ -880,11 +904,11 @@
   <header>
     <a href="#" class="logo"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></a>
     <nav>
-      <a href="#who">Who We Are</a>
-      <a href="#why">Why We Exist</a>
-      <a href="#what">What We Do</a>
-      <a href="#offer">What We Offer</a>
-      <a href="#contact">Contact Us</a>
+      <a href="#who">Who<br>We Are</a>
+      <a href="#why">Why<br>We Exist</a>
+      <a href="#what">What<br>We Do</a>
+      <a href="#offer">What<br>We Offer</a>
+      <a href="#contact">Contact<br>Us</a>
     </nav>
   </header>
 
