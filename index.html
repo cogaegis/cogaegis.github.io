@@ -3,7 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CogAegis | Executive Overview</title>
+  <title>CogAegis | Train the mind to master AI</title>
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="apple-touch-icon" href="images/logo1.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
@@ -19,6 +21,7 @@
       --theme-highlight-bg: rgba(15, 23, 42, 0.98);
       --theme-highlight-border: #0070f3;
       --theme-highlight-shadow: 0 10px 30px rgba(0, 112, 243, 0.25);
+      --content-max: 1200px; /* one shared content width for every section */
     }
 
     html {
@@ -35,6 +38,13 @@
     }
 
     h2 { font-size: 2.2rem; font-weight: 700; letter-spacing: 0.05em; }
+
+    /* Shared content wrapper: keeps every section's left/right edges lined up */
+    .container {
+      width: 100%;
+      max-width: var(--content-max);
+      margin: 0 auto;
+    }
 
     /* Navigation Header */
     header {
@@ -60,8 +70,24 @@
       color: #fff; 
       text-decoration: none !important;
       cursor: pointer;
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
       flex-shrink: 0;
+    }
+    .header-logo-img {
+      height: 38px;
+      width: 38px;
+      display: block;
+    }
+
+    /* Hero logo mark above the CogAegis wordmark */
+    .hero-logo-img {
+      display: block;
+      width: 130px;
+      height: 130px;
+      margin: 0 auto 1.25rem auto;
+      filter: drop-shadow(0 0 18px rgba(56, 189, 248, 0.25));
     }
     
     .logo-cog { font-weight: 300; }
@@ -98,7 +124,7 @@
       grid-template-columns: 1fr 1fr; 
       gap: 3rem; 
       width: 100%; 
-      max-width: 1200px; 
+      max-width: var(--content-max); 
       margin: 0 auto; 
       align-items: center; 
     }
@@ -140,6 +166,30 @@
       color: var(--accent-blue);
       font-weight: 700;
       letter-spacing: 0.05em;
+    }
+
+    /* Key Phrase Highlight — bold + brighter white so important ideas pop inside muted paragraphs */
+    .key-phrase {
+      font-weight: 700;
+      color: #ffffff;
+    }
+
+    /* Desktop: brain image stretches to the full height of the Who We Are text column */
+    @media (min-width: 901px) {
+      #who .grid-2 {
+        align-items: stretch;
+      }
+      #who .integrated-brain-container {
+        min-height: 100%;
+      }
+      #who img.integrated-brain-img {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        max-width: none;
+        object-fit: contain;
+      }
     }
 
     /* Integrated Brain Graphic */
@@ -275,8 +325,7 @@
       margin-bottom: 1.5rem;
       line-height: 1.45;
       min-height: 3.2em;
-      display: flex;
-      align-items: flex-start;
+      display: block; /* must be block, not flex: flex splits text and <strong> phrases into separate columns */
     }
 
     .cards-vertical-stack {
@@ -384,7 +433,7 @@
     /* Process Flow Container Styles */
     .subsection-container {
       width: 100%;
-      max-width: 1200px;
+      max-width: var(--content-max);
       margin: 1rem auto 0 auto;
       padding: 0;
       background: transparent;
@@ -760,6 +809,17 @@
         font-size: 2.3rem;
       }
 
+      .hero-logo-img {
+        width: 90px;
+        height: 90px;
+        margin-bottom: 0.9rem;
+      }
+
+      .header-logo-img {
+        height: 28px;
+        width: 28px;
+      }
+
       .hero-content p {
         font-size: 0.95rem;
       }
@@ -902,7 +962,7 @@
 
   <!-- Header -->
   <header>
-    <a href="#" class="logo"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></a>
+    <a href="#" class="logo"><img src="images/logo1.png" alt="" class="header-logo-img"><span class="logo-text"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></span></a>
     <nav>
       <a href="#who">Who<br>We Are</a>
       <a href="#why">Why<br>We Exist</a>
@@ -915,6 +975,7 @@
   <!-- Hero Section -->
   <section class="section hero">
     <div class="hero-content">
+      <img src="images/logo1.png" alt="CogAegis logo" class="hero-logo-img">
       <h1><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></h1>
       <p><strong>Train the mind</strong> to master AI</p>
     </div>
@@ -926,13 +987,13 @@
       <div>
         <h2>WHO WE ARE</h2>
         <p style="margin-top: 1rem; color: var(--text-muted); font-size: 0.95rem;">
-          CogAegis is an AI integration training firm that helps individuals and organizations adopt AI tools to boost productivity without sacrificing independent thinking. We offer AI literacy training at every level, from foundational tool use to building custom AI agents while preserving critical thinking.
+          CogAegis is an <strong class="key-phrase">AI literacy training firm</strong> that helps individuals and organizations adopt AI tools to <strong class="key-phrase">boost productivity without sacrificing independent thinking and creative ownership</strong>. We offer <strong class="key-phrase">customized AI literacy training sessions</strong> at every level, from foundational tool use to building custom AI agents; <strong class="key-phrase">workshops and information sessions</strong> to highlight risks associated with AI tools and how to navigate around these risks; and <strong class="key-phrase">help build custom AI agents</strong> to improve user productivity and performance.
         </p>
 
         <h3 class="section-subheading" style="margin-top: 1.75rem;">OUR MISSION</h3>
         <div class="theme-highlight-box" style="margin-top: 0.5rem;">
           <p style="color: var(--text-main); font-size: 0.9rem; line-height: 1.5;">
-            To train individuals and organizations with the knowledge, tactics, and tools to deploy AI as a force multiplier for productivity while preserving human critical thinking and creative capacities.
+            <strong class="key-phrase">To increase AI fluency</strong> to individuals and organizations with the knowledge, tactics, and tools to deploy AI as a <strong class="key-phrase">force multiplier for productivity</strong> while preserving <strong class="key-phrase">human critical thinking and creative capacities</strong>.
           </p>
         </div>
 
@@ -946,7 +1007,7 @@
               </div>
               <div class="flip-card-back">
                 <h4>Mind Over Matter</h4>
-                <p>Nothing can replace the beauty of the human mind for creativity, and therefore, we must actively defend it.</p>
+                <p>Nothing can replace the <strong class="key-phrase">beauty of the human mind</strong> for creativity, and therefore, we must <strong class="key-phrase">actively defend it</strong>.</p>
               </div>
             </div>
           </div>
@@ -959,7 +1020,7 @@
               </div>
               <div class="flip-card-back">
                 <h4>Smart AI Integration</h4>
-                <p>AI is essential for commercial survival, so we must learn to master it without compromising our independent reasoning.</p>
+                <p>AI is <strong class="key-phrase">essential for commercial survival</strong>, so we must learn to master it without compromising our <strong class="key-phrase">independent reasoning</strong>.</p>
               </div>
             </div>
           </div>
@@ -972,7 +1033,7 @@
               </div>
               <div class="flip-card-back">
                 <h4>Tailored Solutions</h4>
-                <p>Every individual and organization faces unique needs and will require customized solutions.</p>
+                <p>Every individual and organization faces <strong class="key-phrase">unique needs</strong> and will require <strong class="key-phrase">customized solutions</strong>.</p>
               </div>
             </div>
           </div>
@@ -987,7 +1048,7 @@
 
   <!-- Section 2: Why We Exist -->
   <section id="why" class="section why-section-bg">
-    <div style="max-width: 1280px; margin: 0 auto; width: 100%;">
+    <div class="container">
       <h2>WHY WE EXIST</h2>
       
       <div class="why-horizontal-layout">
@@ -996,7 +1057,7 @@
         <div class="subheading-box">
           <div class="subheading-box-header">
             <h3>To Increase AI Literacy for All</h3>
-            <p>We exist to teach individuals and organizations how to use and benefit from AI.</p>
+            <p>We exist to teach individuals and organizations how to <strong class="key-phrase">use and benefit from AI</strong>.</p>
           </div>
           <div class="cards-vertical-stack">
             
@@ -1046,7 +1107,7 @@
         <div class="subheading-box">
           <div class="subheading-box-header">
             <h3>To Preserve Human Creativity and Critical Thinking</h3>
-            <p>We exist to protect human ingenuity and cognitive thinking while using AI tools.</p>
+            <p>We exist to protect <strong class="key-phrase">human ingenuity and cognitive thinking</strong> while using AI tools.</p>
           </div>
           <div class="cards-vertical-stack">
             
@@ -1096,7 +1157,7 @@
         <div class="subheading-box">
           <div class="subheading-box-header">
             <h3>To Bring Balance to Organic & Artificial Intelligence</h3>
-            <p>We exist to harmonize cutting-edge AI tools to enhance human intellect and creativity and not replace it.</p>
+            <p>We exist to harmonize cutting-edge AI tools to <strong class="key-phrase">enhance human intellect and creativity</strong> and not replace it.</p>
           </div>
           <div class="cards-vertical-stack">
             
@@ -1148,10 +1209,10 @@
 
   <!-- Section 3: What We Do -->
   <section id="what" class="section">
-    <div style="max-width: 1200px; margin: 0 auto; width: 100%; text-align: center;">
+    <div class="container" style="text-align: center;">
       <h2>WHAT WE DO</h2>
       <p style="margin: 1rem auto 0 auto; color: var(--text-muted); font-size: 1.05rem; max-width: 850px; line-height: 1.6;">
-        We deliver AI literacy training across all skill levels alongside cognitive defense strategies that protect originality. Our specialized curriculum includes AI detection methodologies so teams can distinguish synthetic media, paired with custom AI agents and SOP frameworks that preserve human logic.
+        We deliver <strong class="key-phrase">AI literacy training across all skill levels</strong>, alongside <strong class="key-phrase">cognitive defense strategies</strong> that protect critical thinking and originality from AI overreliance. Our training also includes <strong class="key-phrase">AI detection training</strong>, so that individuals know when they are reading, listening to, or watching AI-generated content. For organizations, the firm develops <strong class="key-phrase">customized AI agents and SOPs</strong> that can enhance productivity <strong class="key-phrase">without compromising independent human logic and creativity</strong>.
       </p>
 
       <div class="subsection-container">
@@ -1253,7 +1314,7 @@
 
   <!-- Section 4: What We Offer -->
   <section id="offer" class="section offer-section-bg">
-    <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+    <div class="container">
       <h2>WHAT WE OFFER</h2>
       
       <ul class="offerings-list">
@@ -1275,10 +1336,10 @@
 
   <!-- Section 5: Contact Us -->
   <section id="contact" class="section">
-    <div style="max-width: 1200px; margin: 0 auto; width: 100%;">
+    <div class="container">
       <h2 style="text-align: center;">CONTACT US</h2>
       <p style="text-align: center; color: var(--text-muted); margin-top: 0.5rem; font-size: 1rem;">
-        Submit a request for a consultation or ask any questions about our AI literacy & governance offerings.
+        Submit a request for a <strong class="key-phrase">complimentary consultation</strong> or ask any questions about our AI literacy & governance offerings.
       </p>
 
       <div class="contact-form-container">
