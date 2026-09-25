@@ -1,0 +1,37 @@
+# CogAegis
+
+> CogAegis is an AI literacy training firm based in Victoria, British Columbia, Canada. We help individuals and organizations use AI tools to boost productivity without sacrificing independent thinking, critical thinking and creative ownership. Tagline: "Train the mind to master AI."
+
+## Services
+- Free initial 30-minute consultation
+- AI literacy training at three levels:
+  - Beginner: Discover AI, Talk with AI, Recognize AI Products (suited to seniors and people new to technology)
+  - Intermediate: Research with AI, Create with AI, Market with AI
+  - Advanced: Develop with AI, Integrate with AI, Customize with AI
+- Cognitive Defense Strategy Workshops: practical habits that protect critical thinking and originality from AI overreliance
+- AI detection training: recognizing AI-generated text, audio, images and video, including AI-powered scams and deepfakes
+- Enterprise AI Discoverability Audits and Fixes
+- Customized AI agents with standard operating procedures (SOPs) for organizations
+
+## Who we train
+- Seniors and people with low confidence in technology
+- Communities vulnerable to AI-generated scams
+- Students, educators and researchers (K–12 schools, colleges and universities)
+- Public service organizations and businesses
+
+## Where we serve
+- Now: central and south Vancouver Island, including Parksville, Nanaimo, Duncan and Greater Victoria (Victoria, Saanich, Oak Bay, Esquimalt, Langford, Colwood, View Royal, Sidney, Sooke)
+- Coming soon: the Lower Mainland (Vancouver, Burnaby, Surrey, Richmond, Coquitlam, North Vancouver, West Vancouver, Langley, Abbotsford, Chilliwack, Squamish, Whistler, Sunshine Coast) and the rest of Vancouver Island (Courtenay, Comox, Campbell River, Port Alberni, Tofino, Ucluelet, Port Hardy)
+- Future goal: Canada's major city centres, including Calgary, Edmonton, Saskatoon, Regina, Winnipeg, Toronto, Ottawa, Montréal, Québec City, Halifax and St. John's
+
+## Our approach
+1. Consultation: identify the client's AI literacy level and goals
+2. Education: deliver customized AI training sessions
+3. Investigation: identify areas in the client's operations for AI integration
+4. Creation: build custom AI agents and draft AI standard operating procedures
+5. Integration: introduce and fine-tune AI agents within existing operations
+
+## Contact
+- Website: https://cogaegis.com/
+- Email: questions@cogaegis.com
+- Common questions: https://cogaegis.com/#faq
