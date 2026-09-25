@@ -131,7 +131,6 @@
 
     /* Hero Section */
     .hero {
-      background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.9)), url('images/darkblue.jpg') center/cover;
       text-align: center;
       align-items: center;
       padding-top: 8rem;
@@ -283,6 +282,49 @@
     }
     .value-flip-card .flip-card-back h4 { font-size: 0.95rem; color: var(--accent-cyan); margin-bottom: 0.5rem; }
     .value-flip-card .flip-card-back p { font-size: 0.85rem; color: var(--text-main); line-height: 1.45; }
+
+    /* ==========================================================================
+       SECTION BACKGROUNDS (images + looping videos)
+       ========================================================================== */
+    .who-section-bg {
+      background: linear-gradient(rgba(10, 13, 20, 0.82), rgba(10, 13, 20, 0.92)), url('images/darkblue.jpg') center/cover no-repeat;
+    }
+
+    /* Video background: the video and its dark overlay sit behind the section's content */
+    .has-video-bg {
+      overflow: hidden;
+      isolation: isolate;          /* keeps the negative z-index below inside this section */
+      background: var(--bg-dark);  /* shown until the video loads */
+    }
+    .section-bg {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+    }
+    .bg-video {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Colour treatment: turns any clip into the site's blue palette so all sections match */
+    .video-tint {
+      filter: grayscale(1) sepia(1) hue-rotate(175deg) saturate(3) brightness(0.85);
+    }
+    /* Light clips (white backgrounds) are flipped to dark first, then tinted */
+    .video-tint.video-invert {
+      filter: invert(1) grayscale(1) sepia(1) hue-rotate(175deg) saturate(3) brightness(0.85);
+    }
+
+    /* Same dark wash the image backgrounds use, so text stays readable */
+    .bg-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(rgba(10, 13, 20, 0.72), rgba(10, 13, 20, 0.9));
+    }
 
     /* WHY WE EXIST SECTION */
     .why-section-bg {
@@ -694,9 +736,6 @@
     /* ==========================================================================
        WHERE WE SERVE SECTION
        ========================================================================== */
-    .where-section-bg {
-      background: linear-gradient(rgba(10, 13, 20, 0.9), rgba(10, 13, 20, 0.9)), url('images/mountaingrid.jpg') center/cover no-repeat;
-    }
 
     .where-intro {
       margin-top: 1rem;
@@ -1136,8 +1175,8 @@
     <a href="#" class="logo"><img src="images/logo1.png" alt="" class="header-logo-img"><span class="logo-text"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></span></a>
     <nav>
       <a href="#who">Who<br>We Are</a>
-      <a href="#why">Why<br>We Exist</a>
       <a href="#what">What<br>We Do</a>
+      <a href="#why">Why<br>We Exist</a>
       <a href="#where">Where<br>We Serve</a>
       <a href="#offer">What<br>We Offer</a>
       <a href="#contact">Contact<br>Us</a>
@@ -1145,7 +1184,13 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="section hero">
+  <section class="section hero has-video-bg">
+    <div class="section-bg" aria-hidden="true">
+      <video class="bg-video video-tint" autoplay muted loop playsinline preload="metadata" poster="images/background2-poster.jpg">
+        <source src="images/background2-web.mp4" type="video/mp4">
+      </video>
+      <div class="bg-overlay"></div>
+    </div>
     <div class="hero-content">
       <img src="images/logo1.png" alt="CogAegis logo" class="hero-logo-img">
       <h1><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></h1>
@@ -1154,7 +1199,7 @@
   </section>
 
   <!-- Section 1: Who We Are -->
-  <section id="who" class="section">
+  <section id="who" class="section who-section-bg">
     <div class="grid-2">
       <div>
         <h2>WHO WE ARE</h2>
@@ -1218,7 +1263,118 @@
     </div>
   </section>
 
-  <!-- Section 2: Why We Exist -->
+  <!-- Section 2: What We Do -->
+  <section id="what" class="section has-video-bg">
+    <div class="section-bg" aria-hidden="true">
+      <video class="bg-video video-tint" autoplay muted loop playsinline preload="metadata" poster="images/background3-poster.jpg">
+        <source src="images/background3-web.mp4" type="video/mp4">
+      </video>
+      <div class="bg-overlay"></div>
+    </div>
+    <div class="container" style="text-align: center;">
+      <h2>WHAT WE DO</h2>
+      <p style="margin: 1rem auto 0 auto; color: var(--text-muted); font-size: 1.05rem; max-width: 850px; line-height: 1.6;">
+        We deliver <strong class="key-phrase">AI literacy training across all skill levels</strong>, alongside <strong class="key-phrase">cognitive defense strategies</strong> that protect critical thinking and originality from AI overreliance. Our training also includes <strong class="key-phrase">AI detection training</strong>, so that individuals know when they are reading, listening to, or watching AI-generated content. For organizations, the firm develops <strong class="key-phrase">customized AI agents and SOPs</strong> that can enhance productivity <strong class="key-phrase">without compromising independent human logic and creativity</strong>.
+      </p>
+
+      <div class="subsection-container">
+        <img src="images/balance.png" alt="How We Do It Process Graphic" class="process-banner">
+        
+        <h2 class="subsection-title">HOW WE DO IT</h2>
+        
+        <div class="steps-grid">
+          
+          <div class="step-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="step-number">Step 1</span>
+                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
+                <h4>Consultation</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Consultation</h4>
+                <ul>
+                  <li>Identify Client's AI literacy level</li>
+                  <li>Determine Client's AI literacy goals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="step-number">Step 2</span>
+                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
+                <h4>Education</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Education</h4>
+                <ul>
+                  <li>Deliver customized AI training session(s)</li>
+                  <li>Re-Visit Client's AI literacy goals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="step-number">Step 3</span>
+                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
+                <h4>Investigation</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Investigation</h4>
+                <ul>
+                  <li>Identify areas in Client's operations for AI integration</li>
+                  <li>Determine Client's AI integration goals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="step-number">Step 4</span>
+                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                <h4>Creation</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Creation</h4>
+                <ul>
+                  <li>Build custom AI Agent(s) to integrate within Client's operations</li>
+                  <li>Draft Client's AI standard operating procedures</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+          <div class="step-flip-card">
+            <div class="flip-card-inner">
+              <div class="flip-card-front">
+                <span class="step-number">Step 5</span>
+                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
+                <h4>Integration</h4>
+              </div>
+              <div class="flip-card-back">
+                <h4>Integration</h4>
+                <ul>
+                  <li>Introduce AI Agent(s) to existing operation</li>
+                  <li>Fix and adjust the AI Agent(s) to meet Client's AI integration goals</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Why We Exist -->
   <section id="why" class="section why-section-bg">
     <div class="container">
       <h2>WHY WE EXIST</h2>
@@ -1379,114 +1535,15 @@
     </div>
   </section>
 
-  <!-- Section 3: What We Do -->
-  <section id="what" class="section">
-    <div class="container" style="text-align: center;">
-      <h2>WHAT WE DO</h2>
-      <p style="margin: 1rem auto 0 auto; color: var(--text-muted); font-size: 1.05rem; max-width: 850px; line-height: 1.6;">
-        We deliver <strong class="key-phrase">AI literacy training across all skill levels</strong>, alongside <strong class="key-phrase">cognitive defense strategies</strong> that protect critical thinking and originality from AI overreliance. Our training also includes <strong class="key-phrase">AI detection training</strong>, so that individuals know when they are reading, listening to, or watching AI-generated content. For organizations, the firm develops <strong class="key-phrase">customized AI agents and SOPs</strong> that can enhance productivity <strong class="key-phrase">without compromising independent human logic and creativity</strong>.
-      </p>
-
-      <div class="subsection-container">
-        <img src="images/balance.png" alt="How We Do It Process Graphic" class="process-banner">
-        
-        <h2 class="subsection-title">HOW WE DO IT</h2>
-        
-        <div class="steps-grid">
-          
-          <div class="step-flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="step-number">Step 1</span>
-                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"></path></svg>
-                <h4>Consultation</h4>
-              </div>
-              <div class="flip-card-back">
-                <h4>Consultation</h4>
-                <ul>
-                  <li>Identify Client's AI literacy level</li>
-                  <li>Determine Client's AI literacy goals</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="step-number">Step 2</span>
-                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l9-5-9-5-9 5 9 5z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0112 20.055a11.952 11.952 0 01-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z"></path></svg>
-                <h4>Education</h4>
-              </div>
-              <div class="flip-card-back">
-                <h4>Education</h4>
-                <ul>
-                  <li>Deliver customized AI training session(s)</li>
-                  <li>Re-Visit Client's AI literacy goals</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="step-number">Step 3</span>
-                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                <h4>Investigation</h4>
-              </div>
-              <div class="flip-card-back">
-                <h4>Investigation</h4>
-                <ul>
-                  <li>Identify areas in Client's operations for AI integration</li>
-                  <li>Determine Client's AI integration goals</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="step-number">Step 4</span>
-                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
-                <h4>Creation</h4>
-              </div>
-              <div class="flip-card-back">
-                <h4>Creation</h4>
-                <ul>
-                  <li>Build custom AI Agent(s) to integrate within Client's operations</li>
-                  <li>Draft Client's AI standard operating procedures</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-          <div class="step-flip-card">
-            <div class="flip-card-inner">
-              <div class="flip-card-front">
-                <span class="step-number">Step 5</span>
-                <svg class="step-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M13 10V3L4 14h7v7l9-11h-7z"></path></svg>
-                <h4>Integration</h4>
-              </div>
-              <div class="flip-card-back">
-                <h4>Integration</h4>
-                <ul>
-                  <li>Introduce AI Agent(s) to existing operation</li>
-                  <li>Fix and adjust the AI Agent(s) to meet Client's AI integration goals</li>
-                </ul>
-              </div>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </div>
-  </section>
-
 
   <!-- Section 4: Where We Serve -->
-  <section id="where" class="section where-section-bg">
+  <section id="where" class="section has-video-bg">
+    <div class="section-bg" aria-hidden="true">
+      <video class="bg-video video-tint" autoplay muted loop playsinline preload="metadata" poster="images/background1-poster.jpg">
+        <source src="images/background1-web.mp4" type="video/mp4">
+      </video>
+      <div class="bg-overlay"></div>
+    </div>
     <div class="container">
       <h2>WHERE WE SERVE</h2>
       <p class="where-intro">
@@ -1585,7 +1642,13 @@
   </section>
 
   <!-- Section 6: Contact Us -->
-  <section id="contact" class="section">
+  <section id="contact" class="section has-video-bg">
+    <div class="section-bg" aria-hidden="true">
+      <video class="bg-video video-tint video-invert" autoplay muted loop playsinline preload="metadata" poster="images/background5-poster.jpg">
+        <source src="images/background5-web.mp4" type="video/mp4">
+      </video>
+      <div class="bg-overlay"></div>
+    </div>
     <div class="container">
       <h2 style="text-align: center;">CONTACT US</h2>
       <p style="text-align: center; color: var(--text-muted); margin-top: 0.5rem; font-size: 1rem;">
@@ -1674,6 +1737,21 @@
 
     // Card Interaction Handlers for Desktop & Mobile
     document.addEventListener('DOMContentLoaded', () => {
+
+      // Background videos: play only while visible (saves battery/CPU); stay paused for reduced-motion users
+      const bgVideos = document.querySelectorAll('.bg-video');
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      if (reduceMotion) {
+        bgVideos.forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+      } else if ('IntersectionObserver' in window) {
+        const videoObserver = new IntersectionObserver(entries => {
+          entries.forEach(entry => {
+            const v = entry.target;
+            if (entry.isIntersecting) { v.play().catch(() => {}); } else { v.pause(); }
+          });
+        }, { threshold: 0.05 });
+        bgVideos.forEach(v => videoObserver.observe(v));
+      }
       
       // Where We Serve map cards: desktop click opens the map; mobile tap flips first, second tap opens the map
       document.querySelectorAll('.map-flip-card').forEach(card => {
