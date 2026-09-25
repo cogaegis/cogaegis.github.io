@@ -690,6 +690,177 @@
       background: #0056b3;
     }
 
+
+    /* ==========================================================================
+       WHERE WE SERVE SECTION
+       ========================================================================== */
+    .where-section-bg {
+      background: linear-gradient(rgba(10, 13, 20, 0.9), rgba(10, 13, 20, 0.9)), url('images/mountaingrid.jpg') center/cover no-repeat;
+    }
+
+    .where-intro {
+      margin-top: 1rem;
+      color: var(--text-muted);
+      font-size: 1.05rem;
+      max-width: 850px;
+      line-height: 1.6;
+    }
+
+    .map-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .map-flip-card {
+      height: 360px;
+      perspective: 1200px;
+      cursor: pointer;
+    }
+    .map-flip-card .flip-card-inner {
+      position: relative;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    @media (min-width: 601px) {
+      .map-flip-card:hover .flip-card-inner { transform: rotateY(180deg); }
+    }
+    .map-flip-card.is-flipped .flip-card-inner { transform: rotateY(180deg); }
+
+    .map-flip-card .flip-card-front,
+    .map-flip-card .flip-card-back {
+      position: absolute;
+      inset: 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    /* Front: status tag, icon, title, list of areas */
+    .map-flip-card .flip-card-front {
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid var(--theme-highlight-border);
+      box-shadow: var(--theme-highlight-shadow);
+      padding: 1.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+
+    /* Each card sets its own accent colour; the tag, icon and dots all read from it */
+    .map-flip-card { --stage-color: var(--accent-cyan); }
+    .map-flip-card.stage-soon { --stage-color: #3b8cff; }
+    .map-flip-card.stage-future { --stage-color: #c7d2fe; }
+
+    .stage-tag {
+      align-self: flex-start;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--stage-color);
+      border: 1px solid var(--stage-color);
+      border-radius: 999px;
+      padding: 0.25rem 0.75rem;
+    }
+    .map-card-icon {
+      width: 34px;
+      height: 34px;
+      color: var(--stage-color);
+      filter: drop-shadow(0 0 6px rgba(56, 189, 248, 0.35));
+    }
+    .map-flip-card h3 {
+      font-size: 1.2rem;
+      color: #fff;
+      line-height: 1.3;
+    }
+    .area-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.35rem;
+      font-size: 0.9rem;
+      color: var(--text-main);
+    }
+    .area-list li::before {
+      content: "";
+      display: inline-block;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--stage-color);
+      margin-right: 0.6rem;
+      vertical-align: middle;
+    }
+    .map-card-hint {
+      margin-top: auto;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Back: map preview */
+    .map-flip-card .flip-card-back {
+      transform: rotateY(180deg);
+      background: #0b1322;
+      border: 1px solid var(--accent-cyan);
+      box-shadow: 0 5px 20px rgba(56, 189, 248, 0.3);
+    }
+    .map-flip-card .flip-card-back img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    /* Aim each preview at the part of its map that matters */
+    .map-flip-card.stage-now .flip-card-back img { object-position: 100% 75%; }
+    .map-flip-card.stage-soon .flip-card-back img { object-position: 55% 60%; }
+    .map-flip-card.stage-future .flip-card-back img { object-fit: contain; } /* show all of Canada */
+    .map-flip-card .flip-card-back .chart-overlay-hint {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: rgba(10, 13, 20, 0.85);
+      color: var(--accent-cyan);
+      font-size: 0.72rem;
+      text-align: center;
+      padding: 0.45rem 0;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* Map mode for the shared lightbox: wider, dark background, taller image */
+    .modal-content.is-map { max-width: 1150px; }
+    .modal-content.is-map .full-chart-display img {
+      max-height: 72vh;
+      background: #0b1322;
+      padding: 0;
+    }
+
+    @media (max-width: 900px) {
+      .map-cards-grid {
+        grid-template-columns: 1fr;
+        max-width: 560px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .map-flip-card { height: 320px; }
+    }
+
+    @media (max-width: 600px) {
+      .where-intro { font-size: 0.95rem; }
+      .map-flip-card { height: 300px; }
+      .map-flip-card .flip-card-front { padding: 1.25rem; }
+      .map-flip-card h3 { font-size: 1.05rem; }
+    }
+
     /* Lightbox Modal Structure */
     .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); cursor: pointer; }
     .modal-content { background-color: #0d1117; margin: 3% auto; padding: 2.2rem; border: 1px solid var(--theme-highlight-border); border-radius: 12px; width: 85%; max-width: 820px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); cursor: default; }
@@ -967,6 +1138,7 @@
       <a href="#who">Who<br>We Are</a>
       <a href="#why">Why<br>We Exist</a>
       <a href="#what">What<br>We Do</a>
+      <a href="#where">Where<br>We Serve</a>
       <a href="#offer">What<br>We Offer</a>
       <a href="#contact">Contact<br>Us</a>
     </nav>
@@ -1312,7 +1484,85 @@
     </div>
   </section>
 
-  <!-- Section 4: What We Offer -->
+
+  <!-- Section 4: Where We Serve -->
+  <section id="where" class="section where-section-bg">
+    <div class="container">
+      <h2>WHERE WE SERVE</h2>
+      <p class="where-intro">
+        CogAegis is rooted on <strong class="key-phrase">Vancouver Island</strong>, expanding next to the <strong class="key-phrase">Lower Mainland</strong>, with the long-term goal of serving <strong class="key-phrase">every major city centre in Canada</strong>.
+      </p>
+
+      <div class="map-cards-grid">
+
+        <div class="map-flip-card stage-now" data-modal-title="Now Serving: Central &amp; South Vancouver Island" data-modal-desc="We currently deliver training and services across central and south Vancouver Island, from Parksville through Nanaimo and Duncan to Greater Victoria." data-chart-title="Current service area on Vancouver Island" data-img="images/map-now.png" data-citation="Map: CogAegis. Base map data: Natural Earth (public domain). Service areas are approximate." data-label="Map">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="stage-tag">Now Serving</span>
+              <svg class="map-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M17.657 16.657L13.414 20.9a2 2 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
+              <h3>Central &amp; South Vancouver Island</h3>
+              <ul class="area-list">
+              <li>Parksville</li>
+              <li>Nanaimo</li>
+              <li>Duncan</li>
+              <li>Greater Victoria</li>
+              </ul>
+              <span class="map-card-hint">Hover or tap to see the map</span>
+            </div>
+            <div class="flip-card-back">
+              <img src="images/map-now.png" alt="Map of current CogAegis service area from Parksville to Greater Victoria" loading="lazy">
+              <div class="chart-overlay-hint">Click to Enlarge Map</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="map-flip-card stage-soon" data-modal-title="Coming Soon: Lower Mainland &amp; All of Vancouver Island" data-modal-desc="Our next step is expanding services to the Lower Mainland and the rest of Vancouver Island." data-chart-title="Planned expansion across southwestern British Columbia" data-img="images/map-soon.png" data-citation="Map: CogAegis. Base map data: Natural Earth (public domain). Service areas are approximate." data-label="Map">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="stage-tag">Coming Soon</span>
+              <svg class="map-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7"></path></svg>
+              <h3>Lower Mainland &amp; All of Vancouver Island</h3>
+              <ul class="area-list">
+              <li>Metro Vancouver &amp; Fraser Valley</li>
+              <li>Sea-to-Sky &amp; Sunshine Coast</li>
+              <li>North Island &amp; West Coast</li>
+              </ul>
+              <span class="map-card-hint">Hover or tap to see the map</span>
+            </div>
+            <div class="flip-card-back">
+              <img src="images/map-soon.png" alt="Map of planned CogAegis expansion to the Lower Mainland and all of Vancouver Island" loading="lazy">
+              <div class="chart-overlay-hint">Click to Enlarge Map</div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="map-flip-card stage-future" data-modal-title="Future Vision: Canada&#39;s Major City Centres" data-modal-desc="Our long-term goal is to bring AI literacy training to all of Canada&#39;s major city centres, coast to coast." data-chart-title="Future service goal: major city centres across Canada" data-img="images/map-future.png" data-citation="Map: CogAegis. Base map data: Natural Earth (public domain). Service areas are approximate." data-label="Map">
+          <div class="flip-card-inner">
+            <div class="flip-card-front">
+              <span class="stage-tag">Future Vision</span>
+              <svg class="map-card-icon" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+              <h3>Canada&#39;s Major City Centres</h3>
+              <ul class="area-list">
+              <li>Calgary, Edmonton &amp; the Prairies</li>
+              <li>Toronto, Ottawa &amp; Montréal</li>
+              <li>Québec City &amp; Atlantic Canada</li>
+              </ul>
+              <span class="map-card-hint">Hover or tap to see the map</span>
+            </div>
+            <div class="flip-card-back">
+              <img src="images/map-future.png" alt="Map of Canada showing major city centres CogAegis aims to serve" loading="lazy">
+              <div class="chart-overlay-hint">Click to Enlarge Map</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: What We Offer -->
   <section id="offer" class="section offer-section-bg">
     <div class="container">
       <h2>WHAT WE OFFER</h2>
@@ -1334,7 +1584,7 @@
     </div>
   </section>
 
-  <!-- Section 5: Contact Us -->
+  <!-- Section 6: Contact Us -->
   <section id="contact" class="section">
     <div class="container">
       <h2 style="text-align: center;">CONTACT US</h2>
@@ -1405,10 +1655,12 @@
 
   <script>
     // Global Modal Functions
-    function openChartModal(cardTitle, cardDesc, chartTitle, imageSrc, citation) {
+    function openChartModal(cardTitle, cardDesc, chartTitle, imageSrc, citation, label) {
+      const isMap = label === 'Map';
+      document.querySelector('#chartModal .modal-content').classList.toggle('is-map', isMap);
       document.getElementById('modalCardTitle').innerText = cardTitle;
       document.getElementById('modalCardDesc').innerText = cardDesc;
-      document.getElementById('modalChartTitle').innerText = 'Figure Data: ' + chartTitle;
+      document.getElementById('modalChartTitle').innerText = (label || 'Figure Data') + ': ' + chartTitle;
       document.getElementById('modalImage').src = imageSrc;
       document.getElementById('modalCitation').innerText = citation;
       document.getElementById('chartModal').style.display = "block";
@@ -1423,6 +1675,21 @@
     // Card Interaction Handlers for Desktop & Mobile
     document.addEventListener('DOMContentLoaded', () => {
       
+      // Where We Serve map cards: desktop click opens the map; mobile tap flips first, second tap opens the map
+      document.querySelectorAll('.map-flip-card').forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const isMobile = window.innerWidth <= 600;
+          if (!isMobile || card.classList.contains('is-flipped')) {
+            openChartModal(card.dataset.modalTitle, card.dataset.modalDesc, card.dataset.chartTitle,
+                           card.dataset.img, card.dataset.citation, card.dataset.label);
+            return;
+          }
+          document.querySelectorAll('.map-flip-card.is-flipped').forEach(c => c.classList.remove('is-flipped'));
+          card.classList.add('is-flipped');
+        });
+      });
+
       const allCards = document.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card');
 
       allCards.forEach(card => {
@@ -1478,6 +1745,7 @@
       document.addEventListener('click', (e) => {
         const isMobile = window.innerWidth <= 600;
         if (isMobile) {
+          document.querySelectorAll('.map-flip-card.is-flipped').forEach(c => c.classList.remove('is-flipped'));
           document.querySelectorAll('.value-flip-card.is-flipped, .chart-mini-card.is-flipped, .step-flip-card.is-flipped').forEach(flippedCard => {
             flippedCard.classList.remove('is-flipped');
             const parentContainer = flippedCard.parentElement;
