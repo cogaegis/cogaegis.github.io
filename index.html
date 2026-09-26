@@ -133,6 +133,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Beginner AI literacy training",
+                "url": "https://cogaegis.com/ai-training-beginners.html",
               "description": "Discover AI, talk with AI, and recognize AI products."
             }
           },
@@ -141,6 +142,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Intermediate AI literacy training",
+                "url": "https://cogaegis.com/ai-training-intermediate.html",
               "description": "Research with AI, create with AI, and market with AI."
             }
           },
@@ -149,6 +151,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Advanced AI literacy training",
+                "url": "https://cogaegis.com/ai-training-advanced.html",
               "description": "Develop with AI, integrate with AI, and customize with AI."
             }
           },
@@ -157,6 +160,7 @@
             "itemOffered": {
               "@type": "Service",
               "name": "Cognitive Defense Strategy Workshops",
+                "url": "https://cogaegis.com/cognitive-defense-workshops.html",
               "description": "Practical habits that protect critical thinking and originality from AI overreliance."
             }
           },
@@ -632,6 +636,27 @@
       line-height: 1.45;
       min-height: 3.2em;
       display: block; /* must be block, not flex: flex splits text and <strong> phrases into separate columns */
+    }
+
+    /* Desktop: the three boxes share one set of rows (subgrid), so titles, descriptions
+       and the mini cards line up across columns no matter how many lines each text takes */
+    @media (min-width: 901px) {
+      .why-horizontal-layout {
+        grid-template-rows: auto auto 1fr;
+      }
+      .why-horizontal-layout .subheading-box {
+        display: grid;
+        grid-row: span 3;
+        grid-template-rows: subgrid;
+        row-gap: 0;
+      }
+      .why-horizontal-layout .subheading-box-header {
+        display: contents;          /* lets the title and description join the shared rows */
+      }
+      .why-horizontal-layout .subheading-box-header h3,
+      .why-horizontal-layout .subheading-box-header p {
+        min-height: 0;              /* the old fixed heights are no longer needed */
+      }
     }
 
     .cards-vertical-stack {
@@ -1229,6 +1254,16 @@
       .faq-item summary h3 { font-size: 0.98rem; }
       .faq-item p { padding: 0 1.1rem 1.1rem 1.1rem; font-size: 0.9rem; }
     }
+
+    /* What We Offer: items that have their own detail page */
+    .offer-link {
+      color: inherit;
+      text-decoration: none;
+      border-bottom: 1px dashed rgba(56, 189, 248, 0.5);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .offer-link::after { content: " →"; color: var(--accent-cyan); }
+    .offer-link:hover { color: #fff; border-bottom-color: var(--accent-cyan); }
 
     /* Lightbox Modal Structure */
     .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); cursor: pointer; }
@@ -2034,12 +2069,12 @@
         <li>
           AI Literacy Training Levels
           <ul class="offerings-sublist">
-            <li>Beginner – Discover AI, Talk with AI, and Recognize AI Products</li>
-            <li>Intermediate – Research with AI, Create with AI, and Market with AI</li>
-            <li>Advanced – Develop with AI, Integrate with AI, and Customize with AI</li>
+            <li><a class="offer-link" href="ai-training-beginners.html">Beginner – Discover AI, Talk with AI, and Recognize AI Products</a></li>
+            <li><a class="offer-link" href="ai-training-intermediate.html">Intermediate – Research with AI, Create with AI, and Market with AI</a></li>
+            <li><a class="offer-link" href="ai-training-advanced.html">Advanced – Develop with AI, Integrate with AI, and Customize with AI</a></li>
           </ul>
         </li>
-        <li>Cognitive Defense Strategy Workshops</li>
+        <li><a class="offer-link" href="cognitive-defense-workshops.html">Cognitive Defense Strategy Workshops</a></li>
         <li>Enterprise AI Discoverability Audits and Fixes</li>
         <li>Customized AI Agent with Standard Operating Procedures</li>
       </ul>
