@@ -1262,6 +1262,79 @@
     .offer-link::after { content: " →"; color: var(--accent-cyan); }
     .offer-link:hover { color: #fff; border-bottom-color: var(--accent-cyan); }
 
+    /* ==========================================================================
+       WHAT WE OFFER: training level cards
+       ========================================================================== */
+    .level-cards {
+      margin-top: 1rem;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      max-width: 900px;
+    }
+    .level-card {
+      position: relative;
+      display: block;
+      height: 170px;
+      border-radius: 12px;
+      text-decoration: none;
+      font: inherit;
+      color: inherit;
+      text-align: left;
+      cursor: pointer;
+      padding: 0;
+      border: none;
+      background: none;
+      perspective: 1000px;
+    }
+    /* Shared look for the live card and both faces of the flip cards */
+    .level-live, .level-face {
+      display: flex;
+      flex-direction: column;
+      gap: 0.45rem;
+      padding: 1.25rem 1.35rem;
+      border-radius: 12px;
+      background: rgba(15, 23, 42, 0.94);
+      border: 1px solid var(--theme-highlight-border);
+      box-shadow: var(--theme-highlight-shadow);
+    }
+    .level-live { transition: transform 0.25s, box-shadow 0.25s; }
+    .level-live:hover { transform: translateY(-3px); box-shadow: 0 14px 40px rgba(0, 112, 243, 0.45); }
+    .level-name { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-cyan); }
+    .level-desc { font-size: 0.95rem; line-height: 1.4; color: var(--text-main); }
+    .level-cta { margin-top: auto; font-size: 0.8rem; font-weight: 600; color: var(--accent-cyan); }
+    .level-live .level-cta { color: #fff; }
+
+    .level-inner {
+      position: relative;
+      display: block;
+      width: 100%;
+      height: 100%;
+      transition: transform 0.7s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      transform-style: preserve-3d;
+    }
+    .level-flip.is-flipped .level-inner { transform: rotateY(180deg); }
+    .level-face {
+      position: absolute;
+      inset: 0;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    .level-front .level-cta { color: var(--text-muted); }
+    .level-back {
+      transform: rotateY(180deg);
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+    .level-soon { font-size: 1.3rem; font-weight: 700; color: #fff; letter-spacing: 0.04em; }
+    .level-back .level-desc { color: var(--text-muted); font-size: 0.88rem; }
+
+    @media (max-width: 900px) {
+      .level-cards { grid-template-columns: 1fr; max-width: 520px; }
+      .level-card { height: 140px; }
+    }
+
     /* Lightbox Modal Structure */
     .chart-modal { display: none; position: fixed; z-index: 2000; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgba(0, 0, 0, 0.88); backdrop-filter: blur(8px); cursor: pointer; }
     .modal-content { background-color: #0d1117; margin: 3% auto; padding: 2.2rem; border: 1px solid var(--theme-highlight-border); border-radius: 12px; width: 85%; max-width: 820px; position: relative; box-shadow: 0 20px 50px rgba(0,0,0,0.9); cursor: default; }
@@ -2065,11 +2138,41 @@
         <li>Initial 30 min Consultation – Free</li>
         <li>
           AI Literacy Training Levels
-          <ul class="offerings-sublist">
-            <li><a class="offer-link" href="ai-training-beginners.html">Beginner – Discover AI, Talk with AI, and Recognize AI Products</a></li>
-            <li>Intermediate – Research with AI, Create with AI, and Market with AI</li>
-            <li>Advanced – Develop with AI, Integrate with AI, and Customize with AI</li>
-          </ul>
+          <div class="level-cards">
+            <!-- Beginner: live program, links to its page -->
+            <a class="level-card level-live" href="ai-training-beginners.html">
+              <span class="level-name">Beginner</span>
+              <span class="level-desc">Discover AI, Talk with AI, and Recognize AI Products</span>
+              <span class="level-cta">View program →</span>
+            </a>
+            <!-- Intermediate & Advanced: flip to "Coming soon" until their pages are ready -->
+            <button type="button" class="level-card level-flip" aria-label="Intermediate: Research with AI, Create with AI, and Market with AI. Coming soon.">
+              <span class="level-inner">
+                <span class="level-face level-front">
+                  <span class="level-name">Intermediate</span>
+                  <span class="level-desc">Research with AI, Create with AI, and Market with AI</span>
+                  <span class="level-cta">Learn more</span>
+                </span>
+                <span class="level-face level-back">
+                  <span class="level-soon">Coming Soon</span>
+                  <span class="level-desc">Our Intermediate program is in development.</span>
+                </span>
+              </span>
+            </button>
+            <button type="button" class="level-card level-flip" aria-label="Advanced: Develop with AI, Integrate with AI, and Customize with AI. Coming soon.">
+              <span class="level-inner">
+                <span class="level-face level-front">
+                  <span class="level-name">Advanced</span>
+                  <span class="level-desc">Develop with AI, Integrate with AI, and Customize with AI</span>
+                  <span class="level-cta">Learn more</span>
+                </span>
+                <span class="level-face level-back">
+                  <span class="level-soon">Coming Soon</span>
+                  <span class="level-desc">Our Advanced program is in development.</span>
+                </span>
+              </span>
+            </button>
+          </div>
         </li>
         <li>Cognitive Defense Strategy Workshops</li>
         <li>Enterprise AI Discoverability Audits and Fixes</li>
@@ -2279,6 +2382,18 @@
           card.classList.add('is-flipped');
         });
       });
+
+      // What We Offer: Intermediate/Advanced cards flip to "Coming soon"; tap again or anywhere else to flip back
+      const levelFlips = document.querySelectorAll('.level-flip');
+      levelFlips.forEach(card => {
+        card.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const wasFlipped = card.classList.contains('is-flipped');
+          levelFlips.forEach(c => c.classList.remove('is-flipped'));
+          if (!wasFlipped) card.classList.add('is-flipped');
+        });
+      });
+      document.addEventListener('click', () => levelFlips.forEach(c => c.classList.remove('is-flipped')));
 
       const allCards = document.querySelectorAll('.value-flip-card, .chart-mini-card, .step-flip-card');
 
