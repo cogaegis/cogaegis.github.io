@@ -3,10 +3,26 @@
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
   <url>
     <loc>https://cogaegis.com/</loc>
-    <lastmod>2026-09-24</lastmod>
+    <lastmod>2026-09-25</lastmod>
     <image:image><image:loc>https://cogaegis.com/images/og-image.jpg</image:loc></image:image>
     <image:image><image:loc>https://cogaegis.com/images/map-now.png</image:loc></image:image>
     <image:image><image:loc>https://cogaegis.com/images/map-soon.png</image:loc></image:image>
     <image:image><image:loc>https://cogaegis.com/images/map-future.png</image:loc></image:image>
+  </url>
+  <url>
+    <loc>https://cogaegis.com/ai-training-beginners.html</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cogaegis.com/ai-training-intermediate.html</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cogaegis.com/ai-training-advanced.html</loc>
+    <lastmod>2026-09-25</lastmod>
+  </url>
+  <url>
+    <loc>https://cogaegis.com/cognitive-defense-workshops.html</loc>
+    <lastmod>2026-09-25</lastmod>
   </url>
 </urlset>
