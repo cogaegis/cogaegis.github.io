@@ -110,7 +110,8 @@ document.addEventListener('DOMContentLoaded', () => {
           window.location.href = PAYMENT_LINK + (PAYMENT_LINK.includes('?') ? '&' : '?') + 'prefilled_email=' + email;
           return;
         }
-        form.innerHTML = form.id === 'reserve-form'
+        form.innerHTML = form.dataset.success ? '<p class="form-success">' + form.dataset.success + '</p>'
+          : form.id === 'reserve-form'
           ? '<p class="form-success"><strong>Thank you! Your seat request is in.</strong><br>We’ve received your details and will email you as soon as your session’s date and venue are confirmed, along with a secure payment link.</p>'
           : '<p class="form-success"><strong>Thank you! Your demo request is in.</strong><br>We’ll be in touch within two business days to plan your free Beginner 101 session.</p>';
       } catch (err) {
