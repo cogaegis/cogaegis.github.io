@@ -435,3 +435,26 @@ button.btn { border: none; cursor: pointer; font-family: inherit; }
 }
 /* Long price values sit under their label instead of squeezing it */
 .price-list li.stacked { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
+
+/* ---------- Intended Audience (above the quick facts) ---------- */
+.course-hero .audience-box { margin-top: 2rem; }
+.course-hero .audience-box + .facts { margin-top: 1rem; }
+.audience-list { list-style: none; margin-top: 0.9rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.75rem; }
+.audience-list li {
+  padding: 0.9rem 1.1rem; border-radius: 10px; font-size: 1rem; line-height: 1.45;
+  color: var(--text-main); background: rgba(56, 189, 248, 0.07);
+  border-left: 3px solid var(--accent-cyan);
+}
+.audience-list li strong { color: #fff; }
+
+/* Slides are plain images now (no link) */
+.slide img { border-radius: 10px; border: 1px solid var(--border-color); }
+
+/* Pricing back: small close hint */
+.price-back { cursor: pointer; }
+.price-back-hint { font-size: 0.75rem; color: var(--text-muted); letter-spacing: 0.05em; text-transform: uppercase; }
+
+@media (max-width: 600px) {
+  .audience-list { grid-template-columns: 1fr; }
+  .audience-list li { font-size: 0.95rem; }
+}
