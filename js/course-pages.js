@@ -15,6 +15,32 @@ const PAYMENT_LINK = "";
 document.addEventListener('DOMContentLoaded', () => {
   const byId = id => document.getElementById(id);
 
+  // Pricing flip cards: tap the front to flip and grow to fit the details; "Back" returns to the square card
+  const flips = document.querySelectorAll('.price-flip');
+  const fitHeight = card => {
+    const back = card.querySelector('.price-back');
+    back.style.position = 'relative';            // measure the details at their natural height
+    const h = back.offsetHeight;
+    back.style.position = '';
+    card.style.height = Math.max(h, card.offsetWidth) + 'px';
+  };
+  const setFlip = (card, open) => {
+    card.style.height = card.offsetHeight + 'px'; // start the height animation from the current size
+    card.style.aspectRatio = 'auto';
+    card.classList.toggle('is-flipped', open);
+    card.querySelector('.price-front').setAttribute('aria-expanded', open);
+    requestAnimationFrame(() => {
+      if (open) fitHeight(card);
+      else card.style.height = card.offsetWidth + 'px';
+    });
+    if (!open) setTimeout(() => { if (!card.classList.contains('is-flipped')) { card.style.height = ''; card.style.aspectRatio = ''; } }, 550);
+  };
+  flips.forEach(card => {
+    card.querySelector('.price-front').addEventListener('click', () => setFlip(card, true));
+    card.querySelector('.flip-back').addEventListener('click', () => setFlip(card, false));
+  });
+  window.addEventListener('resize', () => flips.forEach(c => c.classList.contains('is-flipped') && fitHeight(c)));
+
   // Open any dialog from a button with data-open="dialog-id"
   document.querySelectorAll('[data-open]').forEach(btn => {
     btn.addEventListener('click', () => byId(btn.dataset.open)?.showModal());
