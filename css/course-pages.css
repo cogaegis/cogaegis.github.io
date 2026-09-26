@@ -370,3 +370,68 @@ button.btn { border: none; cursor: pointer; font-family: inherit; }
   .schedule td:last-child { padding-top: 0.6rem; }
   .schedule td:last-child .btn { width: 100%; text-align: center; }
 }
+
+/* ---------- Hero: 3 quick facts + Intended Audience box ---------- */
+.facts.facts-3 { grid-template-columns: repeat(3, 1fr); }
+.audience-box {
+  margin-top: 1rem; padding: 1.4rem 1.6rem; border-radius: 12px;
+  background: rgba(15, 23, 42, 0.9);
+  border: 1px solid var(--theme-highlight-border); box-shadow: var(--theme-highlight-shadow);
+}
+.audience-title { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent-cyan); }
+.audience-box p { margin-top: 0.5rem; color: var(--text-muted); font-size: 1rem; }
+.audience-box .check-list { margin-top: 0.9rem; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.5rem 2rem; }
+
+/* ---------- Pricing: flip cards (square front, expands to details on the back) ---------- */
+.price-flip-grid { grid-template-columns: repeat(2, minmax(0, 380px)); justify-content: center; align-items: start; }
+.price-flip {
+  perspective: 1400px;
+  aspect-ratio: 1 / 1;                 /* square until flipped */
+  transition: height 0.5s ease;
+}
+.price-flip-inner {
+  position: relative; width: 100%; height: 100%;
+  transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform-style: preserve-3d;
+}
+.price-flip.is-flipped .price-flip-inner { transform: rotateY(180deg); }
+.price-face {
+  position: absolute; inset: 0; border-radius: 14px;
+  -webkit-backface-visibility: hidden; backface-visibility: hidden;
+}
+.price-front {
+  display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 0.6rem;
+  text-align: center; cursor: pointer; font: inherit; color: inherit; padding: 1.5rem;
+  background: rgba(15, 23, 42, 0.94); border: 1px solid var(--theme-highlight-border);
+  box-shadow: var(--theme-highlight-shadow); transition: transform 0.25s, box-shadow 0.25s;
+}
+.price-front:hover { box-shadow: 0 14px 40px rgba(0, 112, 243, 0.4); }
+.price-icon { width: 46px; height: 46px; color: var(--accent-cyan); filter: drop-shadow(0 0 8px rgba(56, 189, 248, 0.4)); margin-bottom: 0.4rem; }
+.price-front .price-audience { font-size: 0.8rem; }
+.price-front-title { font-size: 1.5rem; font-weight: 700; color: #fff; }
+.price-front-sub { font-size: 0.92rem; color: var(--text-muted); max-width: 260px; }
+.price-front-hint { margin-top: 0.75rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.05em; color: var(--accent-cyan); text-transform: uppercase; }
+.price-back {
+  transform: rotateY(180deg);
+  display: flex; flex-direction: column; gap: 1rem; padding: 1.75rem;
+  background: rgba(15, 23, 42, 0.97); border: 1px solid var(--theme-highlight-border);
+  box-shadow: var(--theme-highlight-shadow); overflow: hidden;
+}
+.price-back h3 { font-size: 1.2rem; color: #fff; margin-top: -0.5rem; }
+.price-back .check-list li { font-size: 0.88rem; color: var(--text-muted); }
+.price-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem 1.25rem; margin-top: auto; }
+.flip-back { background: none; border: none; color: var(--text-muted); font: inherit; font-size: 0.88rem; cursor: pointer; }
+.flip-back:hover { color: #fff; }
+
+@media (max-width: 900px) {
+  .facts.facts-3 { grid-template-columns: 1fr 1fr 1fr; }
+  .audience-box .check-list { grid-template-columns: 1fr; }
+  .price-flip-grid { grid-template-columns: minmax(0, 380px); }
+}
+@media (max-width: 600px) {
+  .facts.facts-3 { grid-template-columns: 1fr; }
+  .audience-box { padding: 1.2rem; }
+  .price-back { padding: 1.35rem; }
+}
+/* Long price values sit under their label instead of squeezing it */
+.price-list li.stacked { flex-direction: column; align-items: flex-start; gap: 0.2rem; }
