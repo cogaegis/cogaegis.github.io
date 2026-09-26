@@ -15,6 +15,16 @@ const PAYMENT_LINK = "";
 document.addEventListener('DOMContentLoaded', () => {
   const byId = id => document.getElementById(id);
 
+  // Background videos: play only while on screen; stay paused for visitors who prefer reduced motion
+  const bgVideos = document.querySelectorAll('.bg-video');
+  if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    bgVideos.forEach(v => { v.removeAttribute('autoplay'); v.pause(); });
+  } else if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver(entries => entries.forEach(en =>
+      en.isIntersecting ? en.target.play().catch(() => {}) : en.target.pause()), { threshold: 0.05 });
+    bgVideos.forEach(v => io.observe(v));
+  }
+
   // Pricing flip cards: tap the front to flip and grow to fit the details; "Back" returns to the square card
   const flips = document.querySelectorAll('.price-flip');
   const fitHeight = card => {
