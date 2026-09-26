@@ -458,3 +458,39 @@ button.btn { border: none; cursor: pointer; font-family: inherit; }
 @media (max-width: 600px) {
   .audience-list li { font-size: 0.95rem; }
 }
+
+/* ==========================================================================
+   Section backgrounds (images + looping videos), same approach as the homepage
+   ========================================================================== */
+.bg-backdrop3 {
+  background: linear-gradient(rgba(10, 13, 20, 0.82), rgba(10, 13, 20, 0.92)), url('../images/backdrop3.jpg') center/cover no-repeat;
+}
+.bg-darkblue {
+  background: linear-gradient(rgba(10, 13, 20, 0.8), rgba(10, 13, 20, 0.92)), url('../images/darkblue.jpg') center/cover no-repeat;
+}
+
+.has-video-bg { position: relative; overflow: hidden; isolation: isolate; background: var(--bg-dark); }
+.section-bg { position: absolute; inset: 0; z-index: -1; pointer-events: none; }
+.bg-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.bg-overlay { position: absolute; inset: 0; background: linear-gradient(rgba(10, 13, 20, 0.72), rgba(10, 13, 20, 0.9)); }
+
+/* Colour treatment: brings every clip into the site's blue palette */
+.video-tint { filter: grayscale(1) sepia(1) hue-rotate(175deg) saturate(3) brightness(0.85); }
+.video-tint.video-invert { filter: invert(1) grayscale(1) sepia(1) hue-rotate(175deg) saturate(3) brightness(0.85); }
+
+/* Hero: darker on the left where the text is, lighter on the right so the bulb shows */
+.course-hero.has-video-bg { background: var(--bg-dark); }
+.overlay-hero {
+  background:
+    linear-gradient(90deg, rgba(10, 13, 20, 0.95) 0%, rgba(10, 13, 20, 0.8) 45%, rgba(10, 13, 20, 0.25) 100%),
+    linear-gradient(rgba(10, 13, 20, 0) 60%, rgba(10, 13, 20, 0.85) 100%);
+}
+@media (max-width: 900px) {
+  /* Text covers the full width on small screens, so keep the whole video darker */
+  .overlay-hero { background: linear-gradient(rgba(10, 13, 20, 0.7), rgba(10, 13, 20, 0.92)); }
+  .course-hero .bg-video { object-position: 80% center; }
+}
+@media (min-width: 901px) {
+  /* Widen the hero video and anchor it left so the bulb lands further right, clear of the text */
+  .course-hero .bg-video { width: 125%; right: auto; }
+}
