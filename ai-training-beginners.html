@@ -217,7 +217,14 @@
     </section>
 
     <!-- Curriculum -->
-    <section id="curriculum" class="course-section bg-backdrop3">
+    <section id="curriculum" class="course-section  has-video-bg">
+      <div class="section-bg" aria-hidden="true">
+        <video class="bg-video video-tint" autoplay muted loop playsinline preload="metadata" poster="images/background1-poster.jpg">
+          <source src="images/background1-web.mp4" type="video/mp4">
+        </video>
+        <div class="bg-overlay "></div>
+      </div>
+
       <div class="container">
         <h2>Program Curriculum</h2>
         <p class="section-intro">Three 50-minute sessions, each building on the last, with plenty of time to practise on your own phone, tablet or laptop.</p>
@@ -276,9 +283,9 @@
     <!-- Program delivery style -->
     <section class="course-section bg-darkblue">
       <div class="container">
-        <span class="story-tag">Program Delivery Style</span>
-        <h2 style="margin-top:0.4rem;">How We Teach</h2>
-        <p class="section-intro">A look inside the Beginner program, with real slides from our sessions.</p>
+        
+        <h2>Program Delivery</h2>
+        <p class="section-intro">The Beginner program is delivered <strong class="key-phrase">in person by a qualified instructor</strong>. Every session is designed to be <strong class="key-phrase">hands-on and interactive</strong>, with helpers in the room to assist you whenever you need it. Here&#39;s a look inside, with real slides from our sessions.</p>
         <div class="delivery-list">
         <div class="delivery-item">
           <div class="delivery-head">
@@ -417,26 +424,33 @@
 
 
 
-    <!-- Call to action -->
-    <section class="cta-band">
+    <!-- Contact -->
+    <section id="contact" class="course-section contact-section">
       <div class="container">
-        <h2>Ready to start?</h2>
-        <p>Reserve a seat at a public group session near you, or book a free demo session for your organization.</p>
-        <a class="btn btn-primary" href="#pricing">View pricing &amp; dates</a>
-      </div>
-    </section>
-
-    <!-- Other programs -->
-    <section class="course-section">
-      <div class="container">
-        <h2>More Programs</h2>
-        <div class="program-links">
-        <div class="program-link coming-soon"><span class="pl-level">Intermediate · Coming soon</span><span class="pl-title">Intermediate AI Training</span><span class="pl-desc">Research, create and market with AI</span></div>
-        <div class="program-link coming-soon"><span class="pl-level">Advanced · Coming soon</span><span class="pl-title">Advanced AI Training</span><span class="pl-desc">Develop, integrate and customize AI</span></div>
-        <div class="program-link coming-soon"><span class="pl-level">Workshop · Coming soon</span><span class="pl-title">Cognitive Defense Workshops</span><span class="pl-desc">Critical thinking and AI detection</span></div>
+        <h2 class="contact-title">Contact Us</h2>
+        <p class="contact-intro">Have a question about the Beginner program? Send us a message and we&#39;ll get back to you.</p>
+        <div class="contact-card">
+          <form class="cg-form" action="https://formspree.io/f/mgaeylrk" method="POST" data-ajax data-success="<strong>Thank you! Your message has been sent.</strong><br>We&#39;ll get back to you within two business days.">
+            <input type="hidden" name="_subject" value="Beginner program inquiry">
+            <input type="hidden" name="form_type" value="Beginner page contact">
+            <div class="form-row">
+              <div><label for="c-name">Full name <span aria-hidden="true">*</span></label>
+              <input type="text" id="c-name" name="name" autocomplete="name" placeholder="John Doe" required></div>
+              <div><label for="c-email">Email address <span aria-hidden="true">*</span></label>
+              <input type="email" id="c-email" name="email" autocomplete="email" placeholder="john@example.com" required></div>
+            </div>
+            <label for="c-type">Request type</label>
+            <select id="c-type" name="request_type"><option>Question about the Beginner program</option><option>Public group session registration</option><option>Private group session for my organization</option><option>Request for complimentary 30min consultation</option><option>General inquiry</option></select>
+            <label for="c-msg">Message / details <span aria-hidden="true">*</span></label>
+            <textarea id="c-msg" name="message" rows="5" placeholder="Tell us about yourself, your organization or your question..." required></textarea>
+            <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+            <button type="submit" class="btn btn-primary">Submit request</button>
+            <p class="form-status" role="status" aria-live="polite"></p>
+          </form>
         </div>
       </div>
     </section>
+
     <!-- Page FAQ -->
     <section class="course-section">
       <div class="container">
