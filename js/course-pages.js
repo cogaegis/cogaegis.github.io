@@ -35,9 +35,19 @@ document.addEventListener('DOMContentLoaded', () => {
     });
     if (!open) setTimeout(() => { if (!card.classList.contains('is-flipped')) { card.style.height = ''; card.style.aspectRatio = ''; } }, 550);
   };
+  // Tapping a card flips it open; tapping it again (or anywhere else on the page) flips it back.
+  // Buttons on the back (e.g. "See sessions & reserve") do their own job instead of flipping.
   flips.forEach(card => {
-    card.querySelector('.price-front').addEventListener('click', () => setFlip(card, true));
-    card.querySelector('.flip-back').addEventListener('click', () => setFlip(card, false));
+    card.addEventListener('click', e => {
+      if (e.target.closest('[data-open], a')) return;
+      setFlip(card, !card.classList.contains('is-flipped'));
+    });
+  });
+  document.addEventListener('click', e => {
+    if (document.querySelector('dialog[open]')) return;   // leave cards alone while a pop-up is open
+    flips.forEach(card => {
+      if (card.classList.contains('is-flipped') && !card.contains(e.target)) setFlip(card, false);
+    });
   });
   window.addEventListener('resize', () => flips.forEach(c => c.classList.contains('is-flipped') && fitHeight(c)));
 
