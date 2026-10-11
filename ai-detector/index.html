@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en-CA">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Detector | CogAegis</title>
+  <meta name="description" content="Check how much of an image, video or piece of writing is AI-generated. Upload a file or paste a link and get a percentage, a brain rating and a plain-language explanation.">
+  <meta name="theme-color" content="#0a0d14">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CogAegis">
+  <meta property="og:title" content="CogAegis AI Detector">
+  <meta property="og:description" content="Is it real, or is it generated? Get a percentage, a brain rating and the reasons why.">
+  <link rel="icon" type="image/png" href="images/logo1.png">
+  <link rel="apple-touch-icon" href="images/logo1.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/detector.css">
+</head>
+<body>
+
+  <header>
+    <a href="./" class="logo">
+      <img src="images/logo1.png" alt="" class="header-logo-img">
+      <span class="logo-text"><span class="logo-cog">Cog</span><span class="logo-aegis">Aegis</span></span>
+      <span class="product-tag">AI Detector</span>
+    </a>
+    <nav aria-label="Main">
+      <a href="#how">How it works</a>
+      <a href="pricing.html">Pricing</a>
+      <a href="https://cogaegis.com/">CogAegis home</a>
+      <span class="scan-counter" id="scanCounter" aria-live="polite">
+        <span class="scan-dots" aria-hidden="true"><span></span><span></span><span></span></span>
+        <span id="scanCounterText"><strong>3</strong> of 3 free scans left</span>
+      </span>
+      <a href="#" class="nav-strong">Sign in</a>
+    </nav>
+  </header>
+
+  <main class="detector-main">
+    <div class="container">
+
+      <p class="demo-banner" id="demoBanner" hidden>
+        <strong class="key-phrase">Preview mode:</strong> detection isn't connected yet, so the results below are sample reports, not an analysis of your content.
+      </p>
+
+      <section class="detector-hero">
+        <h1>Is it real, or is it <span class="accent">generated</span>?</h1>
+        <p>Upload an image, video or text, or paste a link. We estimate how much of it is AI-made and explain <strong class="key-phrase">exactly why</strong>.</p>
+      </section>
+
+      <section class="scan-card" aria-label="Scan content">
+        <div class="tabs" role="tablist" aria-label="Input type">
+          <button class="tab" role="tab" id="tab-upload" aria-controls="panel-upload" aria-selected="true" data-mode="upload">Upload file</button>
+          <button class="tab" role="tab" id="tab-link" aria-controls="panel-link" aria-selected="false" data-mode="link" tabindex="-1">Paste link</button>
+          <button class="tab" role="tab" id="tab-text" aria-controls="panel-text" aria-selected="false" data-mode="text" tabindex="-1">Paste text</button>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="panel-upload" aria-labelledby="tab-upload">
+          <label class="dropzone" id="dropzone">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 16V4"/><path d="M7 9l5-5 5 5"/><path d="M4 16v3a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1v-3"/></svg>
+            <span class="dropzone-title" id="dropTitle">Drop a file here or click to browse</span>
+            <span class="dropzone-hint">JPG, PNG, WEBP, HEIC, MP4, MOV, PDF, DOCX or TXT · up to 200 MB · video up to 60 s</span>
+            <input type="file" id="fileInput" accept="image/*,video/*,.pdf,.doc,.docx,.txt">
+          </label>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="panel-link" aria-labelledby="tab-link" hidden>
+          <label class="field-label" for="linkInput">Link to an image, video, post or article</label>
+          <input class="field" type="url" id="linkInput" placeholder="https://">
+          <p class="field-note">Works with most news sites and public posts. Some platforms block automatic fetching; if so, upload the file instead.</p>
+        </div>
+
+        <div class="tab-panel" role="tabpanel" id="panel-text" aria-labelledby="tab-text" hidden>
+          <label class="field-label" for="textInput">Paste text</label>
+          <textarea class="field" id="textInput" rows="7" placeholder="Paste at least 150 words for a reliable result…"></textarea>
+          <p class="field-note" id="wordNote">Minimum 150 words. Longer text gives a more reliable result.</p>
+        </div>
+
+        <p class="form-error" id="formError" role="alert"></p>
+
+        <div class="scan-actions">
+          <span class="privacy-note">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>
+            Uploads are deleted within 24 hours unless you save the report.
+          </span>
+          <button class="btn btn-primary btn-lg" id="scanBtn" type="button">Scan for AI</button>
+        </div>
+      </section>
+
+      <section class="scanning" id="scanning" aria-live="polite" hidden>
+        <svg class="spinner" viewBox="0 0 40 40" fill="none" aria-hidden="true"><circle cx="20" cy="20" r="16" stroke="rgba(255,255,255,0.12)" stroke-width="4"/><path d="M20 4 A16 16 0 0 1 36 20" stroke="#38bdf8" stroke-width="4" stroke-linecap="round"/></svg>
+        <div>
+          <div class="scanning-title">Analyzing…</div>
+          <div class="scanning-steps">Checking content credentials · Running detectors · Writing the analysis</div>
+        </div>
+      </section>
+
+      <section class="result" id="result" aria-label="Result" hidden>
+        <div class="score-card">
+          <div class="eyebrow">AI-generated likelihood</div>
+          <div class="brain-slot" id="brainSlot"></div>
+          <div class="score-pct" id="scorePct">0%</div>
+          <div class="stage-pill" id="stagePill"></div>
+          <div class="scale" aria-hidden="true">
+            <div class="scale-bar"><span></span><span></span><span></span><span></span><span></span></div>
+            <div class="scale-track"><span class="scale-marker" id="scaleMarker"></span></div>
+            <div class="scale-labels"><span>Certified Organic</span><span>AI Slop</span></div>
+          </div>
+          <p class="caveat">This is an estimate, not proof. Use it alongside other evidence, never as the only reason to judge someone.</p>
+        </div>
+
+        <div class="analysis-card">
+          <div class="source-row">
+            <div>
+              <div class="source-meta" id="sourceMeta"></div>
+              <div class="source-name" id="sourceName"></div>
+            </div>
+            <span class="engine-tag" id="engineTag">Engine v[VERSION] · updated [DATE]</span>
+          </div>
+          <h2 id="whyHeading">Why we rated it</h2>
+          <p class="analysis-summary" id="summary"></p>
+          <h3 class="eyebrow">Evidence checked</h3>
+          <ul class="evidence" id="evidence"></ul>
+          <div class="result-actions">
+            <button class="btn btn-primary" id="againBtn" type="button">Scan something else</button>
+            <button class="btn btn-ghost" id="saveBtn" type="button">Save report</button>
+            <button class="btn btn-ghost" id="reportBtn" type="button">Report a wrong result</button>
+          </div>
+          <p class="toast" id="toast" aria-live="polite"></p>
+        </div>
+      </section>
+
+      <section class="how-grid" id="how" aria-label="How it works">
+        <div class="how-card">
+          <span class="step-number">Step 1</span>
+          <h4>Add your content</h4>
+          <p>Upload a file, paste a link or paste text. Images, video and writing all work.</p>
+        </div>
+        <div class="how-card">
+          <span class="step-number">Step 2</span>
+          <h4>We cross-check it</h4>
+          <p>Content credentials, several independent detectors and a visual or writing review.</p>
+        </div>
+        <div class="how-card">
+          <span class="step-number">Step 3</span>
+          <h4>You see the why</h4>
+          <p>A percentage, a brain rating, a plain-language explanation and every check that shaped it.</p>
+        </div>
+      </section>
+
+    </div>
+  </main>
+
+  <dialog class="cg-dialog" id="paywall" aria-labelledby="paywallTitle">
+    <button type="button" class="dialog-close" id="paywallClose" aria-label="Close">&times;</button>
+    <div class="dialog-head">
+      <div class="brain-slot" id="paywallBrain"></div>
+      <div>
+        <h2 id="paywallTitle">You've used your 3 free scans</h2>
+        <p>Subscribe to keep checking what's real, with full written analysis on every scan.</p>
+      </div>
+    </div>
+    <div class="dialog-plans">
+      <div class="plan featured">
+        <div class="plan-head"><span class="eyebrow">Pro</span><span class="plan-badge">Most popular</span></div>
+        <div class="plan-price">[PRICE] <small>/ month</small></div>
+        <ul><li>[N] scans per month</li><li>Images, video and text</li><li>Saved reports and history</li></ul>
+      </div>
+      <div class="plan">
+        <div class="plan-head"><span class="eyebrow">Team</span></div>
+        <div class="plan-price">[PRICE] <small>/ seat / month</small></div>
+        <ul><li>Shared workspace</li><li>Bulk checks and API</li><li>Usage reports</li></ul>
+      </div>
+    </div>
+    <div class="dialog-actions">
+      <a class="btn btn-primary btn-lg" id="subscribeBtn" href="#">Subscribe to Pro</a>
+      <button class="btn btn-ghost btn-lg" type="button" id="laterBtn">Maybe later</button>
+      <a href="pricing.html">Compare plans</a>
+    </div>
+  </dialog>
+
+  <footer>
+    <p>Questions? Email <a href="mailto:questions@cogaegis.com">questions@cogaegis.com</a></p>
+    <p>&copy; 2026 CogAegis. All rights reserved.</p>
+  </footer>
+
+  <script src="js/brain.js"></script>
+  <script src="js/detector.js"></script>
+</body>
+</html>
